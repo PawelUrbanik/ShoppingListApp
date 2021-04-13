@@ -6,7 +6,9 @@
             <i class="fas fa-share-alt-square"></i>
             Shopping List
         </a>
-        <a href="#" class="login-button">Zaloguj</a>
+        <a href="/login" class="login-button">Zaloguj</a>
+        <a href="/logout" class="login-button">Wyloguj</a>
         <a href="/addList" class="btn-primary">Dodaj listę</a>
+        <a href="/register" class="btn-primary">Zarejestruj</a>
     </nav>
 </div>
