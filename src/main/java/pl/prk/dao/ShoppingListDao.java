@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShoppingListDao extends GenericDao<ShoppingList, Integer> {
     @Override
-    ShoppingList create(ShoppingList newObject);
+    ShoppingList save(ShoppingList newObject);
 
     @Override
     ShoppingList read(Integer primaryKey);

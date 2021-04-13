@@ -5,6 +5,7 @@ public class ShoppingList {
     private int id;
     private String name;
     private String description;
+    private String owner;
 
     public ShoppingList() {
     }
@@ -31,5 +32,13 @@ public class ShoppingList {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

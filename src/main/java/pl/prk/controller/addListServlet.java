@@ -10,6 +10,7 @@ import pl.prk.dao.ShoppingListDaoImpl;
 import pl.prk.model.ShoppingList;
 
 import java.io.IOException;
+import java.util.Random;
 
 @WebServlet("/addList")
 public class addListServlet extends HttpServlet {
@@ -21,11 +22,17 @@ public class addListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String name = req.getParameter("inputName");
+        String description = req.getParameter("inputDescription");
+
+
         ShoppingListDao shoppingListDao = new ShoppingListDaoImpl();
         ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setName("Name12");
-        shoppingList.setDescription("DESSC");
-        shoppingListDao.create(shoppingList);
+        shoppingList.setName(name);
+        shoppingList.setDescription(description);
+        shoppingList.setOwner("Pawel" + new Random().nextInt(100));
+        shoppingListDao.save(shoppingList);
         req.getRequestDispatcher("/").forward(req, resp);
     }
 }

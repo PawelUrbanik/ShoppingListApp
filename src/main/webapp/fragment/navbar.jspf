@@ -7,5 +7,6 @@
             Shopping List
         </a>
         <a href="#" class="login-button">Zaloguj</a>
+        <a href="/addList" class="btn-primary">Dodaj listę</a>
     </nav>
 </div>

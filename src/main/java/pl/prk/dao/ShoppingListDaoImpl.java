@@ -8,19 +8,20 @@ import java.sql.*;
 import java.util.List;
 
 public class ShoppingListDaoImpl implements ShoppingListDao{
-    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc) VALUES(?, ?)";
+    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner) VALUES(?, ?, ?)";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
         this.dataSource = ConnectionProvider.getDataSource();
     }
     @Override
-    public ShoppingList create(ShoppingList newObject) {
+    public ShoppingList save(ShoppingList newObject) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_LIST, Statement.RETURN_GENERATED_KEYS))
         {
             statement.setString(1, newObject.getName());
             statement.setString(2, newObject.getDescription());
+            statement.setString(3, "Pawel"); /*TODOP Ddodawanie wg zalogowanego usera*/
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
