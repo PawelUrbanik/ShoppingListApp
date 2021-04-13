@@ -21,7 +21,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
         {
             statement.setString(1, newObject.getName());
             statement.setString(2, newObject.getDescription());
-            statement.setString(3, "Pawel"); /*TODOP Ddodawanie wg zalogowanego usera*/
+            statement.setInt(3, newObject.getOwner());
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -31,7 +31,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
             throwables.printStackTrace();
         }
 
-        return null;
+        return newObject;
     }
 
     @Override

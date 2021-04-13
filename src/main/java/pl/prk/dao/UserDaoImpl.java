@@ -10,6 +10,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     private final String CREATE_USER = "INSERT INTO user (username, email, password) VALUES (?, ?, ?);";
     private final String CREATE_USER_ROLE = "INSERT INTO user_role (username) VALUES (?);";
+    private final String GET_USER = "SELECT id, username, password FROM user WHERE username = ?";
 
     private final DataSource dataSource;
 
@@ -27,6 +28,33 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User read(Integer primaryKey) {
         return null;
+    }
+
+    @Override
+    public User read(String username) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_USER))
+        {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            User user = mapRow(resultSet);
+            return user;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private User mapRow(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        if (resultSet.next()){
+            Integer id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            user.setId(id);
+            user.setUsername(username);}
+
+            return user;
     }
 
     @Override

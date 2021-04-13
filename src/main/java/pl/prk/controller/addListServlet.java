@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.dao.ShoppingListDao;
 import pl.prk.dao.ShoppingListDaoImpl;
 import pl.prk.model.ShoppingList;
+import pl.prk.service.ListService;
 
 import java.io.IOException;
 import java.util.Random;
 
 @WebServlet("/addList")
 public class addListServlet extends HttpServlet {
+
+    private ListService listService = new ListService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,14 +28,9 @@ public class addListServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("inputName");
         String description = req.getParameter("inputDescription");
+        String username = req.getUserPrincipal().getName();
+        listService.addShoppingList(name, description, username);
 
-
-        ShoppingListDao shoppingListDao = new ShoppingListDaoImpl();
-        ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setName(name);
-        shoppingList.setDescription(description);
-        shoppingList.setOwner("Pawel" + new Random().nextInt(100));
-        shoppingListDao.save(shoppingList);
         req.getRequestDispatcher("/").forward(req, resp);
     }
 }

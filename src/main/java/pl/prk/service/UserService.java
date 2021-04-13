@@ -1,9 +1,12 @@
 package pl.prk.service;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import pl.prk.dao.UserDao;
 import pl.prk.dao.UserDaoImpl;
 import pl.prk.model.User;
 import pl.prk.model.UserRegistration;
+
+import java.security.NoSuchAlgorithmException;
 
 public class UserService {
 
@@ -12,7 +15,24 @@ public class UserService {
     public void register(UserRegistration userRegistration)
     {
         User userToSave = UserMapper.map(userRegistration);
-        userDao.save(userToSave);
+        try {
+            hashPasswordWithSha256(userToSave);
+            userDao.save(userToSave);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public User getUser(String username)
+    {
+        User user= userDao.read(username);
+        return user;
+    }
+
+    private void hashPasswordWithSha256(User user) throws NoSuchAlgorithmException {
+        String sha256Password = DigestUtils.sha256Hex(user.getPassword());
+        user.setPassword(sha256Password);
     }
 
     private static class UserMapper {
