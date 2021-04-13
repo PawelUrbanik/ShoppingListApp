@@ -9,6 +9,7 @@
         <a href="/login" class="login-button">Zaloguj</a>
         <a href="/logout" class="login-button">Wyloguj</a>
         <a href="/addList" class="btn-primary">Dodaj listę</a>
+        <a href="/myLists" class="btn-primary">Moje listy</a>
         <a href="/register" class="btn-primary">Zarejestruj</a>
     </nav>
 </div>
