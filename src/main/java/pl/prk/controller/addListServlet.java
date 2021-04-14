@@ -20,7 +20,7 @@ public class addListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addList.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/addList.jsp").forward(req, resp);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class addListServlet extends HttpServlet {
         String username = req.getUserPrincipal().getName();
         listService.addShoppingList(name, description, username);
 
-        req.getRequestDispatcher("/").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/myLists.jsp").forward(req, resp);
     }
 }

@@ -1,0 +1,64 @@
+body {
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+	transition: 0.2s;
+}
+.navbar {
+	min-height: 80px;
+	background-color: rgba(255,255,255,0.95);	
+}
+.navbar > div > div {
+	height: 80px; 
+	padding-top: 18px;
+}
+.mainmenu {
+	text-transform: uppercase;
+}
+.main-photo {
+	background: url('../img/main-photo.jpg') center center no-repeat;
+	background-size: cover;
+	height: 500px;
+}
+
+.caption {
+	background: rgba(255,255,255,0.7);
+	color: #000;
+	text-align: center;
+	margin-top: 150px;
+	padding: 30px;
+}
+.caption p {
+	font-size: 1.3em;
+}
+.caption p strong {
+	font-size: 2.1em;
+}
+
+.features {
+	text-align: center;
+	padding-top: 30px;
+}
+.features .glyphicon {
+	font-size: 60px;
+}
+
+.call-to-action {
+	text-align: center;
+	padding: 50px;
+}
+.footer {
+	text-align: center;
+}
+@media (max-width: 767px) {
+	.caption h1 {
+	font-size: 1.5em;
+	}
+	.caption p {
+	font-size: 1em;
+	}
+	.caption p strong {
+		font-size: 1.2em;
+	}
+}

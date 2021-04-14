@@ -29,6 +29,6 @@ public class MyListServlet extends HttpServlet {
         shoppingList.setOwner(1);
         lists.add(shoppingList);
         req.setAttribute("lists", lists);
-        req.getRequestDispatcher("/myLists.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/views/myLists.jsp").forward(req, resp);
     }
 }
