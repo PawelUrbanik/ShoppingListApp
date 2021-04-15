@@ -27,7 +27,6 @@ public class ListService {
     }
 
     public List<ShoppingList> getListByUser(String username) {
-//        Integer user_Id = userService.getUser(username).getId();
         List<ShoppingList> lists = shoppingListDao.getListsByUser(username);
         return lists;
     }

@@ -4,6 +4,8 @@ import pl.prk.dao.ProductDao;
 import pl.prk.dao.ProductDaoImpl;
 import pl.prk.model.Product;
 
+import java.util.List;
+
 public class ProductService {
 
     ProductDao productDao = new ProductDaoImpl();
@@ -17,5 +19,10 @@ public class ProductService {
         productToAdd.setListId(listId);
 
         productDao.save(productToAdd);
+    }
+
+    public List<Product> getProductsByList(Integer listId) {
+        List<Product> products = productDao.getProductsById(listId);
+        return products;
     }
 }

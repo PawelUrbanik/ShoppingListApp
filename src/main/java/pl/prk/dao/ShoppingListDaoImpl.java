@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner) VALUES(?, ?, ?)";
-    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, username FROM lists INNER join user  ON user.username=?";
+    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {

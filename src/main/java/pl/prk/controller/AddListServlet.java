@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 
 @WebServlet("/addList")
-public class addListServlet extends HttpServlet {
+public class AddListServlet extends HttpServlet {
 
     private ListService listService = new ListService();
 

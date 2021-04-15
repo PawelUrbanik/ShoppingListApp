@@ -19,4 +19,6 @@ public interface ProductDao extends GenericDao<Product, Integer> {
 
     @Override
     List<Product> getAll();
+
+    List<Product> getProductsById(Integer listId);
 }

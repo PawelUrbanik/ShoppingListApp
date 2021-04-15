@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-8 main well">
                     <div class="blog-post">
-                        <h2 class="blog-post-title"><a href="/review?listId=${list.id}"> ${list.name}</a> </h2>
+                        <h2 class="blog-post-title"><a href="/showList?listId=${list.id}"> ${list.name}</a> </h2>
                         <p>Opis: ${list.description}</p>
-                        <a href="/review?listId=${list.id}" class="btn btn-default">Otwórz i przeglądaj</a>
+                        <a href="/showList?listId=${list.id}" class="btn btn-default">Otwórz i przeglądaj</a>
                     </div>
                 </div>
             </div>

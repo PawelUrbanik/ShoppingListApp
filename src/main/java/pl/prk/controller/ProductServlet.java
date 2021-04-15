@@ -1,13 +1,16 @@
 package pl.prk.controller;
 
+import com.sun.security.auth.UserPrincipal;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import pl.prk.model.Product;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @WebServlet("/addProduct")
 public class ProductServlet extends HttpServlet {
@@ -20,14 +23,17 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        productService.addProductToList("Prdukt1", "Pawel", 6);
-        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+//        System.out.println(req.getParameter("listId"));
+        req.setAttribute("listId", req.getParameter("listId"));
+        req.getRequestDispatcher("/WEB-INF/views/addProduct.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        productService.addProductToList("Prdukt1", "Pawel", 6);
-        super.doPost(req, resp);
+        String name =req.getParameter("inputName");
+        String addedBy =req.getUserPrincipal().getName();
+        Integer listId = Integer.valueOf(req.getParameter("listId"));
+        productService.addProductToList(name, addedBy,listId);
+        resp.sendRedirect("/showList?listId="+listId);
     }
 }

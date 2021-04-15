@@ -11,7 +11,7 @@ import pl.prk.service.UserService;
 import java.io.IOException;
 
 @WebServlet("/register")
-public class registerController extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
     private final UserService userService = new UserService();
 
