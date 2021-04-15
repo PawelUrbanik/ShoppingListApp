@@ -22,5 +22,7 @@ public interface ShoppingListDao extends GenericDao<ShoppingList, Integer> {
 
     @Override
     List<ShoppingList> getAll();
+
+    List<ShoppingList> getListsByUser(String username);
 }
 

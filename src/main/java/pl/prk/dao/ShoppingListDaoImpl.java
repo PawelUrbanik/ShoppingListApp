@@ -5,10 +5,12 @@ import pl.prk.util.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner) VALUES(?, ?, ?)";
+    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, username FROM lists INNER join user  ON user.username=?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -52,5 +54,36 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
     @Override
     public List<ShoppingList> getAll() {
         return null;
+    }
+
+    @Override
+    public List<ShoppingList> getListsByUser(String username) {
+        List<ShoppingList> lists = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_LISTS_BY_USER))
+        {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            lists = mapRow(resultSet);
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return lists;
+    }
+
+    private List<ShoppingList> mapRow(ResultSet resultSet) throws SQLException {
+        List<ShoppingList> resultList = new ArrayList<>();
+        while (resultSet.next())
+        {
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.setId(resultSet.getInt("id"));
+            shoppingList.setName(resultSet.getString("list_name"));
+            shoppingList.setDescription(resultSet.getString("list_desc"));
+            shoppingList.setOwner(resultSet.getInt("list_owner"));
+            resultList.add(shoppingList);
+        }
+        return resultList;
     }
 }

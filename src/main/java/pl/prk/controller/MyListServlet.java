@@ -20,14 +20,7 @@ public class MyListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getUserPrincipal().getName();
-//        List<ShoppingList> lists = listService.getListByUser(username);
-        List<ShoppingList> lists = new ArrayList<>();
-        ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setId(1);
-        shoppingList.setName("Lista Teestowa");
-        shoppingList.setDescription("Description");
-        shoppingList.setOwner(1);
-        lists.add(shoppingList);
+        List<ShoppingList> lists = listService.getListByUser(username);
         req.setAttribute("lists", lists);
         req.getRequestDispatcher("WEB-INF/views/myLists.jsp").forward(req, resp);
     }

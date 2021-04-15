@@ -9,8 +9,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-<%@ include file="../fragment/navbar.jspf"%>
 
+<c:choose>
+    <c:when test="${empty pageContext.request.userPrincipal}">
+        <%@ include file="../fragment/navbar.jspf"%>
+    </c:when>
+    <c:when test="${not empty pageContext.request.userPrincipal}">
+        <%@ include file="../fragment/navbar_user.jspf"%>
+    </c:when>
+</c:choose>
 <h2>Hello World!</h2>
 </body>
 </html>

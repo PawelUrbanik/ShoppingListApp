@@ -4,6 +4,9 @@ import pl.prk.dao.ShoppingListDao;
 import pl.prk.dao.ShoppingListDaoImpl;
 import pl.prk.model.ShoppingList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListService {
 
     private ShoppingListDao shoppingListDao;
@@ -21,5 +24,11 @@ public class ListService {
         Integer owner_id= userService.getUser(owner).getId();
         shoppingList.setOwner(owner_id);
         shoppingListDao.save(shoppingList);
+    }
+
+    public List<ShoppingList> getListByUser(String username) {
+//        Integer user_Id = userService.getUser(username).getId();
+        List<ShoppingList> lists = shoppingListDao.getListsByUser(username);
+        return lists;
     }
 }
