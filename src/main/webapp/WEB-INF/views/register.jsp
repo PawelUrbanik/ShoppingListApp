@@ -8,14 +8,23 @@
 </head>
 <body>
 <%@ include file="../fragment/navbar.jspf"%>
-<div class="container">
-    <form action="/register" method="post" class="user-form">
-        <h2 class="user-form-title">Zarejestruj się</h2>
-        <input name="username" placeholder="Nazwa użytkownika" required>
-        <input name="email" placeholder="email" type="email" required>
-        <input name="password" placeholder="Hasło" type="password" required>
-        <button class="user-form-button">Zarejestruj się</button>
-    </form>
+<div class="container" style="max-width: 480px; margin: auto">
+    <div class="text-center">
+        <h1 class="h2 mb-3 mt-3">Zarejestruj się</h1>
+        <form action="/register" method="post" class="user-form">
+            <label for="usernameInput" class="sr-only">Nazwa użytkownika:</label>
+            <input name="username" class="form-control mb-3" id="usernameInput" placeholder="Nazwa użytkownika" required autofocus>
+            <label for="emailInput" class="sr-only">Email:</label>
+            <input name="email" class="form-control mb-3" id="emailInput" placeholder="email" type="email" required autofocus>
+            <label for="passwordInput" class="sr-only">Hasło:</label>
+            <input name="password" class="form-control mb-3" id="passwordInput" placeholder="Hasło" type="password" required autofocus>
+            <div class="mt-3 mb-3">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Zarejestruj się</button>
+            </div>
+        </form>
+    </div>
+
+
 
 <%--    <%@ include file="" %>--%>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

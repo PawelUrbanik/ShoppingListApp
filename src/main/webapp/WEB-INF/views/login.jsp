@@ -3,20 +3,28 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Zarejestruj się - Shopping List</title>
+    <title>Zaloguj się - Shopping List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 <%@ include file="../fragment/navbar.jspf" %>
-<div class="container">
+<div class="container" style="max-width: 480px">
 
-    <form action="j_security_check" method="post" class="user-form">
-        <h2 class="user-form-title">Zaloguj się</h2>
-        <input name="j_username" placeholder="Nazwa użytkownika" required>
-        <input name="j_password" placeholder="Hasło" type="password" required>
-        <button class="user-form-button">Zaloguj się</button>
-        <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
-    </form>
+    <div class="text-center">
+        <h1 class="h2 mb-3 mt-3">Zaloguj się</h1>
+        <form action="j_security_check" method="post" class="user-form">
+            <label for="usernameInput" class="sr-only">Nazwa użytkownika:</label>
+            <input type="text" id="usernameInput" class="form-control mb-3" name="j_username" placeholder="Nazwa użytkownika" required autofocus>
+            <label for="passwordInput" class="sr-only">Hasło:</label>
+            <input type="password" id="passwordInput" class="form-control" name="j_password" placeholder="Hasło"  required autofocus>
+            <div class="mt-3 mb-3">
+                <button class="btn btn-lg btn-primary btn-block">Zaloguj się</button>
+                <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+            </div>
+
+        </form>
+    </div>
+
 
     <%--    <%@ include file="" %>--%>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
