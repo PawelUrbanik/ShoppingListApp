@@ -1,6 +1,9 @@
 package pl.prk.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.HttpConstraint;
+import jakarta.servlet.annotation.HttpMethodConstraint;
+import jakarta.servlet.annotation.ServletSecurity;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/myLists")
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
+        httpMethodConstraints = {
+                @HttpMethodConstraint(
+                        value = "GET",
+                        rolesAllowed = {"USER"}),
+                @HttpMethodConstraint(
+                        value = "POST",
+                        rolesAllowed = {"USER"}
+                )
+        }
+)
 public class MyListServlet extends HttpServlet {
 
     private ListService listService = new ListService();
