@@ -4,12 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>WEB-INF/views.index.jsp</welcome-file>
+  </welcome-file-list>
 
   <login-config>
     <auth-method>FORM</auth-method>
     <form-login-config>
-      <form-login-page>/login.jsp</form-login-page>
-      <form-error-page>/login.jsp</form-error-page>
+      <form-login-page>/WEB-INF/views/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/views/login.jsp</form-error-page>
     </form-login-config>
   </login-config>
 </web-app>

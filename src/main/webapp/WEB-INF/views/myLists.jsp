@@ -8,17 +8,32 @@
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
  <c:forEach var="list" items="${requestScope.lists}">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 main well">
-                    <div class="blog-post">
-                        <h2 class="blog-post-title"><a href="/showList?listId=${list.id}"> ${list.name}</a> </h2>
-                        <p>Opis: ${list.description}</p>
-                        <a href="/showList?listId=${list.id}" class="btn btn-default">Otwórz i przeglądaj</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+     <div class="card mt-5 mb-3" style="max-width: 800px; margin: auto">
+         <h5 class="card-header"><a href="/showList?listId=${list.id}">${list.name}</a></h5>
+         <div class="card-body">
+             <h5 class="card-title">Opis</h5>
+             <p class="card-text">${list.description}</p>
+             <div class="text-center">
+                 <a href="/showList?listId=${list.id}" class="btn btn-primary ">Otwórz listę</a>
+                 <a href="/modify?listId=${list.id}" class="btn btn-warning">Modyfikuj listę</a>
+                 <a href="/delete?listId=${list.id}" class="btn btn-danger">Usuń listę</a>
+                 <a href="/share?listId=${list.id}" class="btn btn-light">Udostępnij listę</a>
+             </div>
+         </div>
+     </div>
+
+<%--        <div class="container">--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-xs-12 col-sm-8 main well">--%>
+<%--                    <div class="blog-post">--%>
+<%--                        <h2 class="blog-post-title"><a href="/showList?listId=${list.id}"> ${list.name}</a> </h2>--%>
+<%--                        <p>Opis: ${list.description}</p>--%>
+<%--                        <a href="/showList?listId=${list.id}" class="btn btn-default">Otwórz i przeglądaj</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </c:forEach>
 <%--</c:if>--%>
 
