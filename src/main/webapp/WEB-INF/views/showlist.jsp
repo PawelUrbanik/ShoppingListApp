@@ -10,16 +10,16 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th scope="col">Id</th>
+        <th scope="col">Lp.</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Kupione</th>
         <th scope="col">Dodane przez</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="product" items="${requestScope.products}">
+    <c:forEach var="product" items="${requestScope.products}" varStatus="counterStatus">
         <tr>
-            <th scope="row">${product.id}</th>
+            <th scope="row">${counterStatus.count}</th>
             <td>${product.name}</td>
             <td>${product.bought}</td>
             <td>${product.addedBy}</td>
