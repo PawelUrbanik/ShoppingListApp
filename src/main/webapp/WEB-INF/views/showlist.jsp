@@ -12,8 +12,11 @@
     <tr>
         <th scope="col">Lp.</th>
         <th scope="col">Nazwa</th>
-        <th scope="col">Kupione</th>
         <th scope="col">Dodane przez</th>
+        <th scope="col">Kupione</th>
+        <th scope="col" width="50px">Oznacz jako</th>
+        <th scope="col" width="50px">Modyfikacja</th>
+        <th scope="col">Usuwanie</th>
     </tr>
     </thead>
     <tbody>
@@ -21,8 +24,19 @@
         <tr>
             <th scope="row">${counterStatus.count}</th>
             <td>${product.name}</td>
-            <td>${product.bought}</td>
             <td>${product.addedBy}</td>
+            <td><c:if test="${product.bought == 'true'}"><input type="button" disabled class="btn btn-success" value="TAK"></c:if>
+            <c:if test="${product.bought == 'false'}"><input type="button" disabled class="btn btn-danger" value="NIE"></c:if></td>
+            <td width="50px">
+                <c:if test="${product.bought == 'false'}"><input type="button" class="btn btn-outline-success btn-block" value="Zakupiony"></c:if>
+                <c:if test="${product.bought == 'true'}"><input type="button" class="btn btn-outline-danger btn-block" value="Niezakupiony"></c:if>
+            </td>
+            <td width="50px">
+                <input type="button" class="btn btn-outline-secondary" value="Modyfikuj">
+            </td>
+            <td>
+                <input type="button" class="btn btn-danger" value="Usuń">
+            </td>
         </tr>
     </c:forEach>
     </tbody>
