@@ -21,4 +21,6 @@ public interface ProductDao extends GenericDao<Product, Integer> {
     List<Product> getAll();
 
     List<Product> getProductsById(Integer listId);
+
+    boolean changeBought(int productId, boolean bought);
 }

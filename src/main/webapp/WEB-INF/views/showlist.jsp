@@ -35,10 +35,15 @@
                 <c:if test="${product.bought == 'false'}"><input type="button" disabled class="btn btn-danger"
                                                                  value="NIE"></c:if></td>
             <td width="50px">
-                <c:if test="${product.bought == 'false'}"><input type="button" class="btn btn-outline-success btn-block"
+                <form action="/changeProductStatus" method="post">
+                    <input type="hidden" name="product_id" value="${product.id}">
+                    <input type="hidden" name="bought" value="${product.bought}">
+                    <input type="hidden" name="list_id" value="${requestScope.listId}">
+                <c:if test="${product.bought == 'false'}"><input type="submit" class="btn btn-outline-success btn-block"
                                                                  value="Zakupiony"></c:if>
-                <c:if test="${product.bought == 'true'}"><input type="button" class="btn btn-outline-danger btn-block"
+                <c:if test="${product.bought == 'true'}"><input type="submit" class="btn btn-outline-danger btn-block"
                                                                 value="Niezakupiony"></c:if>
+                </form>
             </td>
             <td width="50px">
 

@@ -37,4 +37,10 @@ public class ProductService {
         if (updated) System.out.println("Row updated");
         if (!updated) System.out.println("Row not updated");
     }
+
+    public void changeBought(int productId, boolean bought) {
+        boolean updated = productDao.changeBought(productId, !bought);
+        if (updated) System.out.println("Row updated");
+        if (!updated) System.out.println("Row not updated");
+    }
 }

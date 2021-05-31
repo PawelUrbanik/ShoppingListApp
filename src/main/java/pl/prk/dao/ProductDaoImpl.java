@@ -14,6 +14,7 @@ public class ProductDaoImpl implements ProductDao{
     private final String GET_PRODUCT_BY_LISTID = "SELECT * FROM products WHERE listId=?";
     private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
     private final String UPDATE_PRODUCT = "UPDATE products set name = ? WHERE id = ?";
+    private final String CHANGE_BOUGHT_PRODUCT = "UPDATE products set bought = ? WHERE id = ?";
     private final DataSource dataSource;
 
     public ProductDaoImpl() {
@@ -121,5 +122,25 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Product> getAll() {
         return null;
+    }
+
+    @Override
+    public boolean changeBought(int productId, boolean bought) {
+        int rowUpdated = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CHANGE_BOUGHT_PRODUCT))
+        {
+            statement.setBoolean(1, bought);
+            statement.setInt(2, productId);
+            rowUpdated= statement.executeUpdate();
+        }catch (SQLException e)
+        {
+            System.out.println("cath");
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        if (rowUpdated>0) return true;
+        return false;
     }
 }
