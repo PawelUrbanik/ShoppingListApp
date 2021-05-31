@@ -46,5 +46,6 @@ public class ShowListServlet extends HttpServlet {
         Integer listId = Integer.valueOf(request.getParameter("listId"));
         List<Product> products = productService.getProductsByList(listId);
         request.setAttribute("products", products);
+        request.setAttribute("listId", listId);
     }
 }

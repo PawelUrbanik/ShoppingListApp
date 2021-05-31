@@ -25,4 +25,16 @@ public class ProductService {
         List<Product> products = productDao.getProductsById(listId);
         return products;
     }
+
+    public void delete(int productId) {
+        boolean deleted= productDao.delete(productId);
+        if (deleted) System.out.println("Row deleted");
+        if (!deleted) System.out.println("Row not deleted");
+    }
+
+    public void update(Product product) {
+       boolean updated = productDao.update(product);
+        if (updated) System.out.println("Row updated");
+        if (!updated) System.out.println("Row not updated");
+    }
 }

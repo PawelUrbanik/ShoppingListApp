@@ -12,6 +12,8 @@ public class ProductDaoImpl implements ProductDao{
 
     private final String CREATE_PRODUCT = "INSERT INTO products (name, listId, bought, addedBy) VALUES (?,?,?,?)";
     private final String GET_PRODUCT_BY_LISTID = "SELECT * FROM products WHERE listId=?";
+    private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
+    private final String UPDATE_PRODUCT = "UPDATE products set name = ? WHERE id = ?";
     private final DataSource dataSource;
 
     public ProductDaoImpl() {
@@ -80,11 +82,39 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public boolean update(Product updatedObject) {
+        int rowUpdated = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT))
+        {
+            statement.setString(1, updatedObject.getName());
+            statement.setInt(2, updatedObject.getId());
+            rowUpdated= statement.executeUpdate();
+        }catch (SQLException e)
+        {
+            System.out.println("cath");
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        if (rowUpdated>0) return true;
         return false;
     }
 
     @Override
     public boolean delete(Integer key) {
+        int deletedRows =0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT))
+        {
+            statement.setInt(1,key);
+            deletedRows = statement.executeUpdate();
+            System.out.println(deletedRows);
+        } catch (SQLException e) {
+            System.out.println("catch");
+            System.out.println(e.getMessage());
+            return false;
+        }
+        if (deletedRows>0) return true;
         return false;
     }
 
