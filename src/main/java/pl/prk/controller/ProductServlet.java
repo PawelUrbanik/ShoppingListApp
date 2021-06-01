@@ -47,7 +47,8 @@ public class ProductServlet extends HttpServlet {
         String name =req.getParameter("inputName");
         String addedBy =req.getUserPrincipal().getName();
         Integer listId = Integer.valueOf(req.getParameter("listId"));
-        productService.addProductToList(name, addedBy,listId);
+        Integer count = Integer.valueOf(req.getParameter("count"));
+        productService.addProductToList(name, addedBy,listId, count);
         resp.sendRedirect("/showList?listId="+listId);
     }
 }

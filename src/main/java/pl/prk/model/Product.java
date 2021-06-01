@@ -7,6 +7,7 @@ public class Product {
     private Integer listId;
     private boolean bought;
     private String addedBy;
+    private int count;
 
     public Product() {
     }
@@ -49,5 +50,13 @@ public class Product {
 
     public void setAddedBy(String addedBy) {
         this.addedBy = addedBy;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

@@ -17,8 +17,9 @@
     <tr>
         <th scope="col">Lp.</th>
         <th scope="col">Nazwa</th>
-        <th scope="col">Dodane przez</th>
+        <th scope="col">Ilość</th>
         <th scope="col">Kupione</th>
+        <th scope="col">Dodane przez</th>
         <th scope="col" width="50px">Oznacz jako</th>
         <th scope="col" width="50px">Modyfikacja</th>
         <th scope="col">Usuwanie</th>
@@ -29,11 +30,12 @@
         <tr>
             <th scope="row">${counterStatus.count}</th>
             <td>${product.name}</td>
-            <td>${product.addedBy}</td>
+            <td>${product.count}</td>
             <td><c:if test="${product.bought == 'true'}"><input type="button" disabled class="btn btn-success"
                                                                 value="TAK"></c:if>
                 <c:if test="${product.bought == 'false'}"><input type="button" disabled class="btn btn-danger"
                                                                  value="NIE"></c:if></td>
+            <td>${product.addedBy}</td>
             <td width="50px">
                 <form action="/changeProductStatus" method="post">
                     <input type="hidden" name="product_id" value="${product.id}">
@@ -46,12 +48,12 @@
                 </form>
             </td>
             <td width="50px">
-
-                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#updateProductModal" data-name="${product.name}" data-product_id="${product.id}">Modyfikuj</button>
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#updateProductModal" data-name="${product.name}" data-product_id="${product.id}" data-count="${product.count}">Modyfikuj</button>
             </td>
             <td>
                 <button class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal" data-name="${product.name}" data-product_id="${product.id}">Usuń</button>
             </td>
+
         </tr>
     </c:forEach>
     </tbody>
@@ -104,7 +106,7 @@
                     <label for="product_name_m" >Nazwa produktu:</label><br>
                     <input type="text" id="product_name_m" name="product_name_m"><br>
                     <label for="product_count_m" >Ilość:</label><br>
-                    <input type="number" id="product_count_m" name="product_count_m">
+                    <input type="number" id="product_count_m" name="product_count_m" min="1" max="50">
                     <br>
                     <br>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulujy</button>
@@ -120,12 +122,15 @@ $('#updateProductModal').on('show.bs.modal', function (event) {
 var button = $(event.relatedTarget) // Button that triggered the modal
 var name = button.data('name') // Extract info from data-* attributes
 var product_id = button.data('product_id') // Extract info from data-* attributes
+var count = button.data('count')
     console.log(name)
     console.log(product_id)
 var modal = $(this)
 modal.find('.modal-title').text('Modyfikacja produktu ' + name )
 document.getElementById("product_id_m").value = product_id;
 document.getElementById("product_name_m").value = name;
+document.getElementById("product_count_m").value = count;
+
 })
 $('#deleteProductModal').on('show.bs.modal', function (event) {
     var docmodel = document.getElementById('deleteProductModal')

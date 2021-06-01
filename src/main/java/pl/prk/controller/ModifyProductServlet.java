@@ -39,7 +39,7 @@ public class ModifyProductServlet extends HttpServlet {
         product.setListId(listId);
         product.setId(productId);
         product.setName(productName);
-//        product.setCount(productCount);
+        product.setCount(productCount);
 
         productService.update(product);
         resp.sendRedirect("/showList?listId="+listId);

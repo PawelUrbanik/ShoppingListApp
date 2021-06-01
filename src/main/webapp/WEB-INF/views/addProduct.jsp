@@ -11,6 +11,8 @@
         <h2 class="form-signin-heading">Dodaj Produkt</h2>
         <label for="name" >Nazwa :</label>
         <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus><br>
+        <label for="count" >Ilość:</label>
+        <input name="count" id="count" type="number" class="form-control"  value="1" placeholder="Ilość" min="1" max="50" required autofocus>
         <input name="listId" type="hidden" value="${requestScope.listId}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj</button>
     </form>

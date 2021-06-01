@@ -10,13 +10,14 @@ public class ProductService {
 
     ProductDao productDao = new ProductDaoImpl();
 
-    public void addProductToList(String name, String username, Integer listId)
+    public void addProductToList(String name, String username, Integer listId, int count)
     {
         Product productToAdd = new Product();
         productToAdd.setName(name);
         productToAdd.setAddedBy(username);
         productToAdd.setBought(false);
         productToAdd.setListId(listId);
+        productToAdd.setCount(count);
 
         productDao.save(productToAdd);
     }

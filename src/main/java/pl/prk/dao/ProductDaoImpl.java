@@ -10,10 +10,10 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao{
 
-    private final String CREATE_PRODUCT = "INSERT INTO products (name, listId, bought, addedBy) VALUES (?,?,?,?)";
+    private final String CREATE_PRODUCT = "INSERT INTO products (name, listId, bought, addedBy, count) VALUES (?,?,?,?,?)";
     private final String GET_PRODUCT_BY_LISTID = "SELECT * FROM products WHERE listId=?";
     private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
-    private final String UPDATE_PRODUCT = "UPDATE products set name = ? WHERE id = ?";
+    private final String UPDATE_PRODUCT = "UPDATE products set name = ?, count =? WHERE id = ?";
     private final String CHANGE_BOUGHT_PRODUCT = "UPDATE products set bought = ? WHERE id = ?";
     private final DataSource dataSource;
 
@@ -30,6 +30,7 @@ public class ProductDaoImpl implements ProductDao{
             statement.setInt(2, newObject.getListId());
             statement.setBoolean(3, newObject.isBought());
             statement.setString(4, newObject.getAddedBy());
+            statement.setInt(5, newObject.getCount());
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -70,7 +71,7 @@ public class ProductDaoImpl implements ProductDao{
             product.setBought(resultSet.getBoolean("bought"));
             product.setAddedBy(resultSet.getString("addedBy"));
             product.setListId(resultSet.getInt("listId"));
-
+            product.setCount(resultSet.getInt("count"));
             products.add(product);
         }
         return products;
@@ -88,7 +89,8 @@ public class ProductDaoImpl implements ProductDao{
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT))
         {
             statement.setString(1, updatedObject.getName());
-            statement.setInt(2, updatedObject.getId());
+            statement.setInt(2, updatedObject.getCount());
+            statement.setInt(3, updatedObject.getId());
             rowUpdated= statement.executeUpdate();
         }catch (SQLException e)
         {
