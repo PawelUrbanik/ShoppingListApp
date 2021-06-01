@@ -12,8 +12,8 @@
         <label for="name" >Nazwa listy:</label>
         <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus><br>
         <label for="type">Rodzaj: </label><br>
-        <input id="type" name="inputType" type="radio" value="cat" checked> Publiczna <br>
-        <input name="inputType" type="radio" value="dog" class="mb-3"> Prywatna <br>
+        <input id="type" name="inputType" type="radio" value="publ" checked> Publiczna <br>
+        <input name="inputType" type="radio" value="priv" class="mb-3"> Prywatna <br>
          <label for="description" class="mb-3"> Opis:</label><br>
         <textarea rows="4" id="description" cols="50" name="inputDescription" class="form-control" placeholder="Opis" required></textarea><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj</button>

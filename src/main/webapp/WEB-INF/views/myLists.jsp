@@ -14,29 +14,19 @@
          <div class="card-body">
              <h5 class="card-title">Opis</h5>
              <p class="card-text">${list.description}</p>
+             <p>Typ: <c:if test="${list.type == 'publ'}">publiczna</c:if>
+             <c:if test="${list.type == 'priv'}">prywatna</c:if></p>
              <div class="text-center">
                  <a href="/showList?listId=${list.id}" class="btn btn-primary ">Otwórz listę</a>
                  <a href="/modify?listId=${list.id}" class="btn btn-warning">Modyfikuj listę</a>
                  <a href="/delete?listId=${list.id}" class="btn btn-danger">Usuń listę</a>
+                 <c:if test="${list.type == 'publ'}">publiczna
                  <a href="/share?listId=${list.id}" class="btn btn-light">Udostępnij listę</a>
+                 </c:if>
              </div>
          </div>
      </div>
-
-<%--        <div class="container">--%>
-<%--            <div class="row">--%>
-<%--                <div class="col-xs-12 col-sm-8 main well">--%>
-<%--                    <div class="blog-post">--%>
-<%--                        <h2 class="blog-post-title"><a href="/showList?listId=${list.id}"> ${list.name}</a> </h2>--%>
-<%--                        <p>Opis: ${list.description}</p>--%>
-<%--                        <a href="/showList?listId=${list.id}" class="btn btn-default">Otwórz i przeglądaj</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-    </c:forEach>
-<%--</c:if>--%>
-
+ </c:forEach>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

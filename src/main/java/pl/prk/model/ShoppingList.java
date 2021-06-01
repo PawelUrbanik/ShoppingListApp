@@ -6,6 +6,7 @@ public class ShoppingList {
     private String name;
     private String description;
     private Integer owner;
+    private String type;
 
     public ShoppingList() {
     }
@@ -40,5 +41,13 @@ public class ShoppingList {
 
     public void setOwner(Integer owner) {
         this.owner = owner;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

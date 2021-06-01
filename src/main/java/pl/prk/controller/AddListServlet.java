@@ -42,8 +42,9 @@ public class AddListServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("inputName");
         String description = req.getParameter("inputDescription");
+        String listType = req.getParameter("inputType");
         String username = req.getUserPrincipal().getName();
-        listService.addShoppingList(name, description, username);
+        listService.addShoppingList(name, description, username, listType);
 
         req.getRequestDispatcher("/WEB-INF/views/myLists.jsp").forward(req, resp);
     }

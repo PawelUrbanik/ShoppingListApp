@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListDaoImpl implements ShoppingListDao{
-    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner) VALUES(?, ?, ?)";
-    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
+    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner, list_type) VALUES(?, ?, ?, ?)";
+    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -24,6 +24,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
             statement.setString(1, newObject.getName());
             statement.setString(2, newObject.getDescription());
             statement.setInt(3, newObject.getOwner());
+            statement.setString(4, newObject.getType());
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -82,6 +83,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
             shoppingList.setName(resultSet.getString("list_name"));
             shoppingList.setDescription(resultSet.getString("list_desc"));
             shoppingList.setOwner(resultSet.getInt("list_owner"));
+            shoppingList.setType(resultSet.getString("list_type"));
             resultList.add(shoppingList);
         }
         return resultList;
