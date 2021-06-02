@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public Product save(Product newObject) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT, Statement.RETURN_GENERATED_KEYS))
+             PreparedStatement statement = connection.prepareStatement(CREATE_PRODUCT))
         {
             statement.setString(1,newObject.getName());
             statement.setInt(2, newObject.getListId());

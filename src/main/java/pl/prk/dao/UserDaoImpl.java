@@ -8,9 +8,15 @@ import java.sql.*;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private final String CREATE_USER = "INSERT INTO user (username, email, password) VALUES (?, ?, ?);";
-    private final String CREATE_USER_ROLE = "INSERT INTO user_role (username) VALUES (?);";
-    private final String GET_USER = "SELECT id, username, password FROM user WHERE username = ?";
+//    MYSQL
+//    private final String CREATE_USER = "INSERT INTO user (username, email, password) VALUES (?, ?, ?);";
+//    ORACLE
+    private final String CREATE_USER = "INSERT INTO user_l (username, email, password) VALUES (?, ?, ?)";
+    private final String CREATE_USER_ROLE = "INSERT INTO user_role (username) VALUES (?)";
+//    MYSQL
+//    private final String GET_USER = "SELECT id, username, password FROM user WHERE username = ?";
+//    ORACLE
+    private final String GET_USER = "SELECT id, username, password FROM user_l WHERE username = ?";
 
     private final DataSource dataSource;
 
@@ -74,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 
     private void saveUser(User newUser) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
             statement.setString(1, newUser.getUsername());
             statement.setString(2, newUser.getEmail());
             statement.setString(3, newUser.getPassword());

@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
+<!--MYSQL-->
+<!--        <Resource name="jdbc/lists"-->
+<!--                  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"-->
+<!--                  type="javax.sql.DataSource"-->
+<!--                  username="root"-->
+<!--                  password="admin"-->
+<!--                  driverClassName="com.mysql.cj.jdbc.Driver"-->
+<!--                  url="jdbc:mysql://localhost:3306/lists?serverTimezone=UTC"/>-->
 
-        <Resource name="jdbc/lists"
-                  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-                  type="javax.sql.DataSource"
-                  username="root"
-                  password="admin"
-                  driverClassName="com.mysql.cj.jdbc.Driver"
-                  url="jdbc:mysql://localhost:3306/lists?serverTimezone=UTC"/>
+<!--        <Realm className="org.apache.catalina.realm.DataSourceRealm"-->
+<!--               dataSourceName="jdbc/lists"-->
+<!--               localDataSource="true"-->
+<!--               userTable="user"-->
+<!--               userNameCol="username"-->
+<!--               userCredCol="password"-->
+<!--               userRoleTable="user_role"-->
+<!--               roleNameCol="role_name">-->
+<!--                <CredentialHandler-->
+<!--                        className="org.apache.catalina.realm.MessageDigestCredentialHandler"-->
+<!--                        algorithm="SHA-256" />-->
+<!--        </Realm>-->
 
-        <Realm className="org.apache.catalina.realm.DataSourceRealm"
-               dataSourceName="jdbc/lists"
-               localDataSource="true"
-               userTable="user"
-               userNameCol="username"
-               userCredCol="password"
-               userRoleTable="user_role"
-               roleNameCol="role_name">
-                <CredentialHandler
-                        className="org.apache.catalina.realm.MessageDigestCredentialHandler"
-                        algorithm="SHA-256" />
-        </Realm>
+                <Resource name="jdbc/lists"
+                          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+                          type="javax.sql.DataSource"
+                          username=""
+                          password=""
+                          driverClassName="oracle.jdbc.OracleDriver"
+                          url="jdbc:oracle:thin:@//ora4.ii.pw.edu.pl:1521/pdb1.ii.pw.edu.pl"/>
+
+                <Realm className="org.apache.catalina.realm.DataSourceRealm"
+                       dataSourceName="jdbc/lists"
+                       localDataSource="true"
+                       userTable="user_l"
+                       userNameCol="username"
+                       userCredCol="password"
+                       userRoleTable="user_role"
+                       roleNameCol="role_name">
+                        <CredentialHandler
+                                className="org.apache.catalina.realm.MessageDigestCredentialHandler"
+                                algorithm="SHA-256" />
+                </Realm>
 </Context>

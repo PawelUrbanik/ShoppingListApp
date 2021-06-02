@@ -10,7 +10,10 @@ import java.util.List;
 
 public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner, list_type) VALUES(?, ?, ?, ?)";
-    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
+//    MYSQL
+//    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
+//    ORACLE
+    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user_l  ON lists.list_owner= user_l.id AND user_l.username=?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -19,7 +22,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
     @Override
     public ShoppingList save(ShoppingList newObject) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(CREATE_LIST, Statement.RETURN_GENERATED_KEYS))
+             PreparedStatement statement = connection.prepareStatement(CREATE_LIST))
         {
             statement.setString(1, newObject.getName());
             statement.setString(2, newObject.getDescription());

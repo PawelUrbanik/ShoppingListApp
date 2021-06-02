@@ -109,7 +109,7 @@
                     <input type="number" id="product_count_m" name="product_count_m" min="1" max="50">
                     <br>
                     <br>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulujy</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
                     <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
                 </form>
             </div>
@@ -130,7 +130,6 @@ modal.find('.modal-title').text('Modyfikacja produktu ' + name )
 document.getElementById("product_id_m").value = product_id;
 document.getElementById("product_name_m").value = name;
 document.getElementById("product_count_m").value = count;
-
 })
 $('#deleteProductModal').on('show.bs.modal', function (event) {
     var docmodel = document.getElementById('deleteProductModal')
