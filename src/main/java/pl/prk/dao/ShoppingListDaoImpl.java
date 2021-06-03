@@ -15,6 +15,8 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 //    ORACLE
     private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user_l  ON lists.list_owner= user_l.id AND user_l.username=?";
     private final String UPDATE_LIST = "UPDATE lists SET list_name = ?, list_desc = ? WHERE id = ?";
+    private final String DELETE_LIST = "DELETE FROM lists WHERE id=?";
+    private final String DELETE_PRODUCTS_FROM_LIST = "DELETE FROM products WHERE listid = ?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -71,6 +73,63 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 
     @Override
     public boolean delete(Integer key) {
+
+        int deletedLists = 0;
+        int deletedProducts = 0;
+        Connection connection = null;
+        PreparedStatement deleteListStatement = null;
+        PreparedStatement deleteProductsStatement = null;
+        try
+        {
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
+            deleteListStatement = connection.prepareStatement(DELETE_LIST);
+            deleteProductsStatement = connection.prepareStatement(DELETE_PRODUCTS_FROM_LIST);
+
+            deleteProductsStatement.setInt(1,key);
+            deletedProducts = deleteProductsStatement.executeUpdate();
+
+
+            deleteListStatement.setInt(1, key);
+            deletedLists = deleteListStatement.executeUpdate();
+
+            System.out.println("Deleted products: " + deletedProducts + "Deleted lists: " + deletedLists);
+            connection.commit();
+
+        }catch (SQLException e)
+        {
+            try {
+                connection.rollback();
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+            System.out.println("catch");
+            System.out.println(e.getMessage());
+            return false;
+        }finally {
+            if (deleteProductsStatement!=null) {
+                try {
+                    deleteProductsStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (deleteListStatement!= null) {
+                try {
+                    deleteListStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection!= null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (deletedLists>0) return true;
         return false;
     }
 

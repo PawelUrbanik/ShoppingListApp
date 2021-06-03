@@ -29,7 +29,14 @@
                          data-list_desc="${list.description}">
                      Modyfikuj listę
                  </button>
-                 <a href="/delete?listId=${list.id}" class="btn btn-danger">Usuń listę</a>
+                 <button class="btn btn-danger"
+                         data-toggle="modal"
+                         data-target="#deleteListModal"
+                         data-name ="${list.name}"
+                         data-list_id="${list.id}"
+                         data-list_type="${list.type}">
+                     Usuń listę
+                 </button>
                  <c:if test="${list.type == 'publ'}">
                  <a href="/share?listId=${list.id}" class="btn btn-light">Udostępnij listę</a>
                  </c:if>
@@ -39,7 +46,7 @@
  </c:forEach>
 
 
-<!-- Update Product Modal -->
+<!-- Update List Modal -->
 <div class="modal fade" id="updateListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -68,20 +75,69 @@
     </div>
 </div>
 
+
+<!-- Delete List Modal -->
+<div class="modal fade" id="deleteListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Czy chcesz usunąć listę o nazwie </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="public_list_info">
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <form method="POST" action="/deleteList">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+                    <input type="hidden" name="list_id" id="list_id">
+                    <input type="hidden" name="list_type" id="list_type">
+                    <button type="submit" class="btn btn-danger">Tak, usuń listę</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $('#updateListModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var name = button.data('name') // Extract info from data-* attributes
         var list_id = button.data('list_id') // Extract info from data-* attributes
         var list_desc = button.data('list_desc')
-        console.log(name)
-        console.log(list_id)
-        console.log(list_desc)
         var modal = $(this)
         modal.find('.modal-title').text('Modyfikacja listy ' + name )
         document.getElementById("list_id_m").value = list_id;
         document.getElementById("list_name_m").value = name;
         document.getElementById("list_desc_m").value = list_desc;
+    })
+
+    $('#deleteListModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var name = button.data('name') // Extract info from data-* attributes
+        var list_id = button.data('list_id') // Extract info from data-* attributes
+        var list_type  = button.data('list_type')
+        var modal = $(this)
+        modal.find('.modal-title').text('Czy chcesz usunąć listę ' + name + ' i wszystkie znajdujące się na niej produkty?')
+        document.getElementById("list_id").value = list_id;
+        document.getElementById("list_type").value = list_type;
+        console.log(list_type)
+        if ('publ' === list_type)
+        {
+            modal.find('.modal-body').text('Probujesz usunąć listę publiczną. Jeśli lista została udostępniona innym użytkownikom' +
+                ' to po usunięciu utracą do niej dostęp.\n' +
+                'Uwaga: usunięcie listy jest operacją nieodwracalną!')
+        }else  if ('priv' === list_type)
+        {
+            modal.find('.modal-body').text('Uwaga: usunięcie listy jest operacją nieodwracalną!')
+        } else {
+            modal.find('.modal-body').text('')
+        }
     })
 </script>
 </body>

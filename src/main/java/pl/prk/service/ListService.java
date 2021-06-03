@@ -35,4 +35,8 @@ public class ListService {
     public boolean update(ShoppingList updatedList) {
         return shoppingListDao.update(updatedList);
     }
+
+    public boolean delete(int listId) {
+        return shoppingListDao.delete(listId);
+    }
 }

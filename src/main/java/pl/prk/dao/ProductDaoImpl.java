@@ -111,7 +111,6 @@ public class ProductDaoImpl implements ProductDao{
         {
             statement.setInt(1,key);
             deletedRows = statement.executeUpdate();
-            System.out.println(deletedRows);
         } catch (SQLException e) {
             System.out.println("catch");
             System.out.println(e.getMessage());
