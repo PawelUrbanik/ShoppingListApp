@@ -31,4 +31,8 @@ public class ListService {
         List<ShoppingList> lists = shoppingListDao.getListsByUser(username);
         return lists;
     }
+
+    public boolean update(ShoppingList updatedList) {
+        return shoppingListDao.update(updatedList);
+    }
 }

@@ -14,6 +14,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 //    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
 //    ORACLE
     private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user_l  ON lists.list_owner= user_l.id AND user_l.username=?";
+    private final String UPDATE_LIST = "UPDATE lists SET list_name = ?, list_desc = ? WHERE id = ?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -47,6 +48,24 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 
     @Override
     public boolean update(ShoppingList updatedObject) {
+
+        int rowUpdated = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_LIST))
+        {
+            statement.setString(1,updatedObject.getName());
+            statement.setString(2,updatedObject.getDescription());
+            statement.setInt(3, updatedObject.getId());
+
+            rowUpdated= statement.executeUpdate();
+        }catch (SQLException e)
+        {
+            System.out.println("catch");
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        if (rowUpdated>0) return true;
         return false;
     }
 

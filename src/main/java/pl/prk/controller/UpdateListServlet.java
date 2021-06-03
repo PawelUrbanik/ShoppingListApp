@@ -5,14 +5,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import pl.prk.model.ShoppingList;
+import pl.prk.service.ListService;
 
 import java.io.IOException;
 
 @WebServlet("/updateList")
 public class UpdateListServlet extends HttpServlet {
 
+    ListService listService = new ListService();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        int listId = Integer.parseInt(req.getParameter("list_id_m"));
+        String newListName = req.getParameter("list_name_m");
+        String newListDesc = req.getParameter("list_desc_m");
+
+
+        ShoppingList updatedList = new ShoppingList();
+        updatedList.setId(listId);
+        updatedList.setName(newListName);
+        updatedList.setDescription(newListDesc);
+
+        listService.update(updatedList);
+
+//TODO wyświetlenie błędu jeśli nie zostanie zaktualizowane
         System.out.println("update lists");
         resp.sendRedirect("/myLists");
     }
