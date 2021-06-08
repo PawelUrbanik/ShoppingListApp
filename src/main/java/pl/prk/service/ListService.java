@@ -4,7 +4,6 @@ import pl.prk.dao.ShoppingListDao;
 import pl.prk.dao.ShoppingListDaoImpl;
 import pl.prk.model.ShoppingList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListService {

@@ -36,7 +36,6 @@ public class ProductDaoImpl implements ProductDao{
             if (generatedKeys.next()) {
                 newObject.setId(generatedKeys.getInt(1));
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
