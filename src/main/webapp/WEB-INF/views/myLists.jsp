@@ -38,7 +38,11 @@
                      Usuń listę
                  </button>
                  <c:if test="${list.type == 'publ'}">
-                 <a href="/share?listId=${list.id}" class="btn btn-light">Udostępnij listę</a>
+                     <form action="/sharedLists" method="post">
+                         <input type="hidden" name="listId" value="${list.id}">
+                         <input type="hidden" name="list_owner_id" value="${list.owner}">
+                         <input type="submit" class="btn btn-light" value="Udostępnij listę">
+                     </form>
                  </c:if>
              </div>
          </div>

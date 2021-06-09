@@ -1,5 +1,6 @@
 package pl.prk.dao;
 
+import pl.prk.exception.RowExistYetException;
 import pl.prk.model.SharedList;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface SharedListDao extends GenericDao<SharedList, Integer> {
 
     @Override
-    default SharedList save(SharedList newObject) {
+    default SharedList save(SharedList newObject) throws RowExistYetException {
         return null;
     }
 

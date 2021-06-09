@@ -1,13 +1,11 @@
 package pl.prk.dao;
 
+import pl.prk.exception.RowExistYetException;
 import pl.prk.model.SharedList;
 import pl.prk.util.ConnectionProvider;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class SharedListDaoImpl implements SharedListDao {
@@ -23,19 +21,21 @@ public class SharedListDaoImpl implements SharedListDao {
 
 
     @Override
-    public SharedList save(SharedList newObject) {
+    public SharedList save(SharedList newObject) throws RowExistYetException {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement checkIfExistStatement = connection.prepareStatement(CHECK_IF_ROW_EXIST);
-             PreparedStatement statement = connection.prepareStatement(CREATE_SHARED_LIST))
-        {
+             PreparedStatement statement = connection.prepareStatement(CREATE_SHARED_LIST, new String[]{"id"})) {
 
 
-            ResultSet resultSet =  checkIfExistStatement.executeQuery();
-            if (resultSet.next())
-            {
+            checkIfExistStatement.setInt(1, newObject.getListId());
+            checkIfExistStatement.setInt(2, newObject.getUserId());
+            ResultSet resultSet = checkIfExistStatement.executeQuery();
+            if (resultSet.next()) {
+                System.out.println(resultSet.getInt(1));
                 System.out.println("Exist!");
-                return null;
+                throw new RowExistYetException();
             }
+
 
             statement.setInt(1, newObject.getListId());
             statement.setInt(2, newObject.getOwnerId());
@@ -48,8 +48,9 @@ public class SharedListDaoImpl implements SharedListDao {
 
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys!=null) {
-                newObject.setId(generatedKeys.getInt(1));
+            if (generatedKeys.next()) {
+                Integer id = generatedKeys.getInt(1);
+                newObject.setId(id);
             }
 
 
@@ -60,23 +61,23 @@ public class SharedListDaoImpl implements SharedListDao {
         return newObject;
     }
 
-        @Override
-        public SharedList read (Integer primaryKey){
-            return SharedListDao.super.read(primaryKey);
-        }
-
-        @Override
-        public boolean update (SharedList updatedObject){
-            return SharedListDao.super.update(updatedObject);
-        }
-
-        @Override
-        public boolean delete (Integer key){
-            return SharedListDao.super.delete(key);
-        }
-
-        @Override
-        public List<SharedList> getAll () {
-            return SharedListDao.super.getAll();
-        }
+    @Override
+    public SharedList read(Integer primaryKey) {
+        return SharedListDao.super.read(primaryKey);
     }
+
+    @Override
+    public boolean update(SharedList updatedObject) {
+        return SharedListDao.super.update(updatedObject);
+    }
+
+    @Override
+    public boolean delete(Integer key) {
+        return SharedListDao.super.delete(key);
+    }
+
+    @Override
+    public List<SharedList> getAll() {
+        return SharedListDao.super.getAll();
+    }
+}
