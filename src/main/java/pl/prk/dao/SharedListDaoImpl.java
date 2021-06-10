@@ -1,18 +1,24 @@
 package pl.prk.dao;
 
 import pl.prk.exception.RowExistYetException;
+import pl.prk.model.Product;
 import pl.prk.model.SharedList;
 import pl.prk.util.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SharedListDaoImpl implements SharedListDao {
 
-    private final String CREATE_SHARED_LIST = "INSERT INTO shared (list_id, owner_id, user_id, update_list, add_product, " +
-            "update_product, change_state, delete_product) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_SHARED_LIST = "INSERT INTO shared (list_id, owner_id, user_id, username, update_list, add_product, " +
+            "update_product, change_state, delete_product) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String CHECK_IF_ROW_EXIST = "SELECT * FROM shared WHERE list_id = ? AND user_id = ?";
+    private final String GET_SHARED_BY_OWNER_ID = "SELECT * FROM shared WHERE owner_id=?";
+    private final String UPDATE_SHARED = "UPDATE shared SET update_list=?, add_product=?, update_product=?," +
+            "change_state=?, delete_product=? WHERE id=?";
+
     private final DataSource dataSource;
 
     public SharedListDaoImpl() {
@@ -40,11 +46,12 @@ public class SharedListDaoImpl implements SharedListDao {
             statement.setInt(1, newObject.getListId());
             statement.setInt(2, newObject.getOwnerId());
             statement.setInt(3, newObject.getUserId());
-            statement.setBoolean(4, newObject.isUpdateList());
-            statement.setBoolean(5, newObject.isAddingProducts());
-            statement.setBoolean(6, newObject.isUpdateProducts());
-            statement.setBoolean(7, newObject.isChangingState());
-            statement.setBoolean(8, newObject.isDeleteProducts());
+            statement.setString(4, newObject.getUsername());
+            statement.setBoolean(5, newObject.isUpdateList());
+            statement.setBoolean(6, newObject.isAddingProducts());
+            statement.setBoolean(7, newObject.isUpdateProducts());
+            statement.setBoolean(8, newObject.isChangingState());
+            statement.setBoolean(9, newObject.isDeleteProducts());
 
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -79,5 +86,70 @@ public class SharedListDaoImpl implements SharedListDao {
     @Override
     public List<SharedList> getAll() {
         return SharedListDao.super.getAll();
+    }
+
+    @Override
+    public List<SharedList> getAllByOwnerId(Integer ownnerId) {
+        List<SharedList> shared = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_SHARED_BY_OWNER_ID, Statement.RETURN_GENERATED_KEYS))
+        {
+            statement.setInt(1, ownnerId);
+            ResultSet resultSet = statement.executeQuery();
+            shared = mapRow(resultSet);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return shared;
+    }
+
+    private List<SharedList> mapRow(ResultSet resultSet) throws SQLException {
+        List<SharedList> sharedLists = new ArrayList<>();
+        while (resultSet.next())
+        {
+            SharedList sharedList = new SharedList();
+            sharedList.setId(resultSet.getInt("id"));
+            sharedList.setListId(resultSet.getInt("list_id"));
+            sharedList.setOwnerId(resultSet.getInt("owner_id"));
+            sharedList.setUserId(resultSet.getInt("user_id"));
+            sharedList.setUsername(resultSet.getString("username"));
+            sharedList.setUpdateList(resultSet.getBoolean("update_list"));
+            sharedList.setAddingProducts(resultSet.getBoolean("add_product"));
+            sharedList.setUpdateProducts(resultSet.getBoolean("update_product"));
+            sharedList.setChangingState(resultSet.getBoolean("change_state"));
+            sharedList.setDeleteProducts(resultSet.getBoolean("delete_product"));
+
+
+            sharedLists.add(sharedList);
+        }
+        return sharedLists;
+    }
+
+    @Override
+    public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct) {
+        int rowUpdated = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_SHARED))
+        {
+            statement.setBoolean(1,updateList);
+            statement.setBoolean(2,addProduct);
+            statement.setBoolean(3,updateProduct);
+            statement.setBoolean(4,changeState);
+            statement.setBoolean(5,deleteProduct);
+
+            statement.setInt(6,sharedListId);
+
+            rowUpdated= statement.executeUpdate();
+        }catch (SQLException e)
+        {
+            System.out.println("catch");
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        if (rowUpdated>0) return true;
+        return false;
     }
 }

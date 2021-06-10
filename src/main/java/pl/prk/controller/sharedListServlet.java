@@ -6,13 +6,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.model.SharedList;
+import pl.prk.model.User;
 import pl.prk.service.SharedListService;
+import pl.prk.service.UserService;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/sharedLists")
 public class sharedListServlet extends HttpServlet {
+
+    UserService userService = new UserService();
+    SharedListService sharedListService = new SharedListService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,9 +26,15 @@ public class sharedListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<SharedList> sharedLists
-//        req.setAttribute("sharedList", sharedLists);
-        System.out.println(req.getParameter("listId"));
+
+        String username = req.getUserPrincipal().getName();
+        User user = userService.getUser(username);
+
+
+
+        List<SharedList> sharedLists = sharedListService.getAllByOwnerId(user.getId());
+        System.out.println(sharedLists);
+        req.setAttribute("sharedList", sharedLists);
         req.setAttribute("listId",req.getParameter("listId"));
         req.getRequestDispatcher("/WEB-INF/views/addSharedList.jsp").forward(req,resp);
     }

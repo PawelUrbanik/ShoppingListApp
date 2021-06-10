@@ -7,6 +7,9 @@ import pl.prk.exception.UserNotExistException;
 import pl.prk.model.SharedList;
 import pl.prk.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SharedListService {
 
     SharedListDao sharedListDao;
@@ -32,6 +35,7 @@ public class SharedListService {
         sharedList.setListId(listId);
         sharedList.setOwnerId(ownerId);
         sharedList.setUserId(user.getId());
+        sharedList.setUsername(username);
         sharedList.setUpdateList(updateList);
         sharedList.setAddingProducts(addProduct);
         sharedList.setUpdateProducts(updateProduct);
@@ -43,5 +47,19 @@ public class SharedListService {
 
         if (listShared.getId()!= null) return true;
         return false;
+    }
+
+    public List<SharedList> getAllByOwnerId(Integer ownerId){
+        List<SharedList> sharedLists= null;
+        sharedLists= sharedListDao.getAllByOwnerId(ownerId);
+        if (sharedLists == null){
+            sharedLists = new ArrayList<>();
+
+        }
+        return sharedLists;
+    }
+
+    public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct) {
+        return sharedListDao.update(sharedListId, updateList, addProduct, updateProduct, changeState, deleteProduct);
     }
 }
