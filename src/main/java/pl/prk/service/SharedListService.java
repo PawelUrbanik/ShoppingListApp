@@ -62,4 +62,8 @@ public class SharedListService {
     public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct) {
         return sharedListDao.update(sharedListId, updateList, addProduct, updateProduct, changeState, deleteProduct);
     }
+
+    public boolean deleteSharedListById(Integer sharedListId) {
+        return sharedListDao.delete(sharedListId);
+    }
 }

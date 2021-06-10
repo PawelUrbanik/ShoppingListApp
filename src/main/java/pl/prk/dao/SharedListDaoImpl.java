@@ -18,6 +18,7 @@ public class SharedListDaoImpl implements SharedListDao {
     private final String GET_SHARED_BY_OWNER_ID = "SELECT * FROM shared WHERE owner_id=?";
     private final String UPDATE_SHARED = "UPDATE shared SET update_list=?, add_product=?, update_product=?," +
             "change_state=?, delete_product=? WHERE id=?";
+    private final String DELETE_SHARED = "DELETE FROM shared WHERE id=?";
 
     private final DataSource dataSource;
 
@@ -80,7 +81,18 @@ public class SharedListDaoImpl implements SharedListDao {
 
     @Override
     public boolean delete(Integer key) {
-        return SharedListDao.super.delete(key);
+        int deletedRows = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_SHARED))
+        {
+            statement.setInt(1,key);
+            deletedRows = statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("catch");
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return deletedRows > 0;
     }
 
     @Override
@@ -129,7 +141,7 @@ public class SharedListDaoImpl implements SharedListDao {
 
     @Override
     public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct) {
-        int rowUpdated = 0;
+        int rowUpdated;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SHARED))
         {
@@ -149,7 +161,6 @@ public class SharedListDaoImpl implements SharedListDao {
             return false;
         }
 
-        if (rowUpdated>0) return true;
-        return false;
+        return rowUpdated > 0;
     }
 }

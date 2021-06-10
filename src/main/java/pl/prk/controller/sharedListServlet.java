@@ -33,7 +33,7 @@ public class sharedListServlet extends HttpServlet {
 
 
         List<SharedList> sharedLists = sharedListService.getAllByOwnerId(user.getId());
-        System.out.println(sharedLists);
+//        System.out.println(sharedLists);
         req.setAttribute("sharedList", sharedLists);
         req.setAttribute("listId",req.getParameter("listId"));
         req.getRequestDispatcher("/WEB-INF/views/addSharedList.jsp").forward(req,resp);

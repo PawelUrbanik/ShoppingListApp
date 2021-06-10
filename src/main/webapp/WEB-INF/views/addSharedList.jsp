@@ -65,8 +65,8 @@
                 </button>
             </td>
             <td>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal"
-                        data-name="${product.name}" data-product_id="${product.id}">Usuń
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteSharedModal"
+                        data-user_name="${shared.username}" data-shared_id="${shared.id}">Usuń
                 </button>
             </td>
         </tr>
@@ -137,6 +137,30 @@
 </div>
 
 
+<!-- Delete Shared Modal -->
+<div class="modal fade" id="deleteSharedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+
+            <div class="modal-footer">
+                <form method="POST" action="/deleteShared">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+                    <input type="hidden" name="shared_id_d" id="shared_id_d">
+                    <input type="hidden" name="list_id" id="list_id" value="${requestScope.listId}">
+                    <button type="submit" class="btn btn-danger">Tak</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     $('#updateSharedModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -148,6 +172,17 @@
         modal.find('.modal-title').text('Zmiana uprawnień dla użytkownika '  +username)
         document.getElementById("shared_list_id_m").value = id;
     })
+
+    $('#deleteSharedModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var sharedListId = button.data('shared_id')
+        var username = button.data('user_name')
+
+        var modal = $(this)
+        modal.find('.modal-title').text('Czy chcesz cofnąć udostępnianie listy dla ' + username )
+        document.getElementById('shared_id_d').value =sharedListId;
+    })
+
 </script>
 </body>
 </html>
