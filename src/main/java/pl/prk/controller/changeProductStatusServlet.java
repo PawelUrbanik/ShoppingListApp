@@ -21,7 +21,15 @@ public class changeProductStatusServlet extends HttpServlet {
         int productId = Integer.parseInt(req.getParameter("product_id"));
         boolean bought = Boolean.parseBoolean(req.getParameter("bought"));
         productService.changeBought(productId ,bought);
+        boolean sharedReq = req.getParameter("sharedReq") != null;
 
-        resp.sendRedirect("/showList?listId=" + listId);
+        String url="";
+        if (sharedReq){
+            url = "/showOneSharedList?listId=" +listId;
+        }else {
+            url = "/showList?listId=" + listId;
+        }
+
+        resp.sendRedirect(url);
     }
 }

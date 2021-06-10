@@ -2,6 +2,7 @@ package pl.prk.dao;
 
 import pl.prk.exception.RowExistYetException;
 import pl.prk.model.SharedList;
+import pl.prk.model.ShoppingList;
 
 import java.util.List;
 
@@ -35,4 +36,8 @@ public interface SharedListDao extends GenericDao<SharedList, Integer> {
     public List<SharedList> getAllByOwnerId(Integer ownnerId);
 
     public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct);
+
+    public List<ShoppingList> getAllSharedFor(String user);
+
+    SharedList getOneByIdAndUsername(Integer listId, String user);
 }

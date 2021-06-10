@@ -49,6 +49,16 @@ public class ProductServlet extends HttpServlet {
         Integer listId = Integer.valueOf(req.getParameter("listId"));
         Integer count = Integer.valueOf(req.getParameter("count"));
         productService.addProductToList(name, addedBy,listId, count);
-        resp.sendRedirect("/showList?listId="+listId);
+        boolean sharedReq = req.getParameter("sharedReq") != null;
+
+
+        String url="";
+        if (sharedReq){
+            url = "/showOneSharedList?listId=" +listId;
+        }else {
+            url = "/showList?listId=" + listId;
+        }
+
+        resp.sendRedirect(url);
     }
 }

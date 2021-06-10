@@ -5,6 +5,7 @@ import pl.prk.dao.SharedListDaoImpl;
 import pl.prk.exception.RowExistYetException;
 import pl.prk.exception.UserNotExistException;
 import pl.prk.model.SharedList;
+import pl.prk.model.ShoppingList;
 import pl.prk.model.User;
 
 import java.util.ArrayList;
@@ -65,5 +66,13 @@ public class SharedListService {
 
     public boolean deleteSharedListById(Integer sharedListId) {
         return sharedListDao.delete(sharedListId);
+    }
+
+    public List<ShoppingList> getAllSharedForUser(String user) {
+        return sharedListDao.getAllSharedFor(user);
+    }
+
+    public SharedList getOneByListIdAndUsername(Integer listId, String user) {
+        return sharedListDao.getOneByIdAndUsername(listId, user);
     }
 }

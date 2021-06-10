@@ -26,6 +26,15 @@ public class DeleteProductServlet extends HttpServlet {
 
         productService.delete(productId);
 
-        resp.sendRedirect("/showList?listId="+listId);
+        boolean sharedReq = req.getParameter("sharedReq") != null;
+
+        String url="";
+        if (sharedReq){
+            url = "/showOneSharedList?listId=" +listId;
+        }else {
+            url = "/showList?listId=" + listId;
+        }
+
+        resp.sendRedirect(url);
     }
 }

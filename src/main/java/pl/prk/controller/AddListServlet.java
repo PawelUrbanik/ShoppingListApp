@@ -46,6 +46,6 @@ public class AddListServlet extends HttpServlet {
         String username = req.getUserPrincipal().getName();
         listService.addShoppingList(name, description, username, listType);
 
-        req.getRequestDispatcher("/WEB-INF/views/myLists.jsp").forward(req, resp);
+        resp.sendRedirect("/myLists");
     }
 }
