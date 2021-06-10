@@ -33,7 +33,7 @@ public interface SharedListDao extends GenericDao<SharedList, Integer> {
         return null;
     }
 
-    public List<SharedList> getAllByOwnerId(Integer ownnerId);
+    public List<SharedList> getAllByOwnerId(Integer ownnerId, Integer listId);
 
     public boolean update(Integer sharedListId, boolean updateList, boolean addProduct, boolean updateProduct, boolean changeState, boolean deleteProduct);
 

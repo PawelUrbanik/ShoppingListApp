@@ -16,7 +16,7 @@ public class SharedListDaoImpl implements SharedListDao {
     private final String CREATE_SHARED_LIST = "INSERT INTO shared (list_id, owner_id, user_id, username, update_list, add_product, " +
             "update_product, change_state, delete_product) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String CHECK_IF_ROW_EXIST = "SELECT * FROM shared WHERE list_id = ? AND user_id = ?";
-    private final String GET_SHARED_BY_OWNER_ID = "SELECT * FROM shared WHERE owner_id=?";
+    private final String GET_SHARED_BY_OWNER_ID = "SELECT * FROM shared WHERE owner_id=? AND list_id = ?";
     private final String UPDATE_SHARED = "UPDATE shared SET update_list=?, add_product=?, update_product=?," +
             "change_state=?, delete_product=? WHERE id=?";
     private final String DELETE_SHARED = "DELETE FROM shared WHERE id=?";
@@ -104,12 +104,13 @@ public class SharedListDaoImpl implements SharedListDao {
     }
 
     @Override
-    public List<SharedList> getAllByOwnerId(Integer ownnerId) {
+    public List<SharedList> getAllByOwnerId(Integer ownnerId, Integer listId) {
         List<SharedList> shared = null;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_SHARED_BY_OWNER_ID, Statement.RETURN_GENERATED_KEYS))
         {
             statement.setInt(1, ownnerId);
+            statement.setInt(2, listId);
             ResultSet resultSet = statement.executeQuery();
             shared = mapRow(resultSet);
 

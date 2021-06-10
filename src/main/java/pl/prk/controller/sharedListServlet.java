@@ -29,10 +29,11 @@ public class sharedListServlet extends HttpServlet {
 
         String username = req.getUserPrincipal().getName();
         User user = userService.getUser(username);
+        Integer lsitId = Integer.valueOf(req.getParameter("listId"));
 
 
 
-        List<SharedList> sharedLists = sharedListService.getAllByOwnerId(user.getId());
+        List<SharedList> sharedLists = sharedListService.getAllByOwnerId(user.getId(), lsitId);
 //        System.out.println(sharedLists);
         req.setAttribute("sharedList", sharedLists);
         req.setAttribute("listId",req.getParameter("listId"));

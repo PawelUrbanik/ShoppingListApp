@@ -50,9 +50,9 @@ public class SharedListService {
         return false;
     }
 
-    public List<SharedList> getAllByOwnerId(Integer ownerId){
+    public List<SharedList> getAllByOwnerId(Integer ownerId, Integer listId){
         List<SharedList> sharedLists= null;
-        sharedLists= sharedListDao.getAllByOwnerId(ownerId);
+        sharedLists= sharedListDao.getAllByOwnerId(ownerId, listId);
         if (sharedLists == null){
             sharedLists = new ArrayList<>();
 

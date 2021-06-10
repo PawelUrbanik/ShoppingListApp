@@ -24,7 +24,7 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserRegistration userRegistration = getUserData(req);
         userService.register(userRegistration);
-        resp.sendRedirect("/");
+        resp.sendRedirect("/myLists");
     }
 
     private UserRegistration getUserData(HttpServletRequest request) {
