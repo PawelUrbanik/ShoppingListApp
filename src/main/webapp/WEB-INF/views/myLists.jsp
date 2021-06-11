@@ -10,6 +10,19 @@
 </head>
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
+<div class="text-center">
+<c:if test="${requestScope.succes == 'true'}">
+    <div class="alert alert-success d-inline-block" role="alert">
+        ${requestScope.alertMessage}
+    </div>
+</c:if>
+<c:if test="${requestScope.succes == 'false'}">
+    <div class="alert alert-success" role="alert">
+            ${requestScope.alertMessage}
+    </div>
+</c:if>
+</div>
+
  <c:forEach var="list" items="${requestScope.lists}">
 
      <div class="card mt-5 mb-3" style="max-width: 800px; margin: auto">

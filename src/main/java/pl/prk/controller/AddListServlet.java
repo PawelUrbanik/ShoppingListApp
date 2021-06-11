@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.dao.ShoppingListDao;
 import pl.prk.dao.ShoppingListDaoImpl;
+import pl.prk.exception.AddListException;
 import pl.prk.model.ShoppingList;
 import pl.prk.service.ListService;
 
@@ -44,8 +45,19 @@ public class AddListServlet extends HttpServlet {
         String description = req.getParameter("inputDescription");
         String listType = req.getParameter("inputType");
         String username = req.getUserPrincipal().getName();
-        listService.addShoppingList(name, description, username, listType);
+        boolean succes = listService.addShoppingList(name, description, username, listType);
+        String alertMessage = "";
 
-        resp.sendRedirect(req.getContextPath()+"/myLists");
+        if (succes)
+        {
+            alertMessage = "Poprawnie dodano listę o nazwie " + name;
+        }else {
+                alertMessage = "Wystąpił błąd przy dodawaniu listy!";
+        }
+
+        req.setAttribute("succes", succes);
+        req.setAttribute("alertMessage", alertMessage);
+
+        req.getRequestDispatcher("/myLists").forward(req, resp);
     }
 }

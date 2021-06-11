@@ -29,8 +29,8 @@ public class sharedListServlet extends HttpServlet {
 
         String username = req.getUserPrincipal().getName();
         User user = userService.getUser(username);
+        System.out.println("Shared: "+req.getParameter("listId"));
         Integer lsitId = Integer.valueOf(req.getParameter("listId"));
-
 
 
         List<SharedList> sharedLists = sharedListService.getAllByOwnerId(user.getId(), lsitId);

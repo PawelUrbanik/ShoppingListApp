@@ -91,7 +91,7 @@
         <label for="changeState">Zmiana stanu</label><br>
         <input type="checkbox" id="deleteProduct" name="deleteProduct" checked>
         <label for="deleteProduct">Usuwanie produktów</label><br>
-        <input name="listId" type="hidden" value="${requestScope.listId}">
+        <input name="listId" type="hidden" id="listId" value="${requestScope.listId}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Udostępnij listę</button>
     </form>
     <form action="${pageContext.request.contextPath}/myLists" method="get">
@@ -152,7 +152,7 @@
                 <form method="POST" action="${pageContext.request.contextPath}/deleteShared">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
                     <input type="hidden" name="shared_id_d" id="shared_id_d">
-                    <input type="hidden" name="list_id" id="list_id" value="${requestScope.listId}">
+                    <input type="hidden" name="listId" value="${requestScope.listId}">
                     <button type="submit" class="btn btn-danger">Tak</button>
                 </form>
             </div>

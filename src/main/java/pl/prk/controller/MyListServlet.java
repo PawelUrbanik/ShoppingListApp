@@ -38,4 +38,9 @@ public class MyListServlet extends HttpServlet {
         req.setAttribute("lists", lists);
         req.getRequestDispatcher("/WEB-INF/views/myLists.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req,resp);
+    }
 }
