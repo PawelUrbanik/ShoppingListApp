@@ -59,6 +59,6 @@ public class ProductServlet extends HttpServlet {
             url = "/showList?listId=" + listId;
         }
 
-        resp.sendRedirect(url);
+        resp.sendRedirect(req.getContextPath()+url);
     }
 }

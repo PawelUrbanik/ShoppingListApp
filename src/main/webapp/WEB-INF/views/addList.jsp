@@ -7,7 +7,7 @@
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
 <div class="container" style="max-width: 600px">
-    <form class="form-signin" action="/addList" method="post">
+    <form class="form-signin" action="${pageContext.request.contextPath}/addList" method="post">
         <h2 class="form-signin-heading text-center">Dodaj nową listę</h2>
         <label for="name" >Nazwa listy:</label>
         <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus><br>
@@ -18,7 +18,7 @@
         <textarea rows="4" id="description" cols="50" name="inputDescription" class="form-control" placeholder="Opis" required></textarea><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj</button>
     </form>
-    <a href="/myLists"><button class="btn btn-primary">Przejdź do utworzonych list</button></a>
+    <a href="${pageContext.request.contextPath}/myLists"><button class="btn btn-primary">Przejdź do utworzonych list</button></a>
 </div>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <div class="container" style="max-width: 480px; margin: auto">
     <div class="text-center">
         <h1 class="h2 mb-3 mt-3">Zarejestruj się</h1>
-        <form action="/register" method="post" class="user-form">
+        <form action="${pageContext.request.contextPath}/register" method="post" class="user-form">
             <label for="usernameInput" class="sr-only">Nazwa użytkownika:</label>
             <input name="username" class="form-control mb-3" id="usernameInput" placeholder="Nazwa użytkownika" required autofocus>
             <label for="emailInput" class="sr-only">Email:</label>

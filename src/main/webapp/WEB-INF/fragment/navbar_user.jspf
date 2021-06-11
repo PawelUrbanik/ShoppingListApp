@@ -7,21 +7,20 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/"><strong>Lista zakupowa</strong></a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/"><strong>Lista zakupowa</strong></a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Strona domowa <span class="sr-only">(current)</span></a>
+s            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/myLists" class="nav-link" >Moje listy</a>
             </li>
             <li class="nav-item">
-                <a href="/myLists" class="nav-link" >Moje listy</a>
+                <a href="${pageContext.request.contextPath}/addList" class="nav-link">Dodaj listę</a>
             </li>
             <li class="nav-item">
-                <a href="/addList" class="nav-link">Dodaj listę</a>
-            </li>
-            <li class="nav-item">
-                <a href="/sharedForMe" class="nav-link">Udostępnione listy</a>
+                <a href="${pageContext.request.contextPath}/sharedForMe" class="nav-link">Udostępnione listy</a>
             </li>
         </ul>
         <c:choose>

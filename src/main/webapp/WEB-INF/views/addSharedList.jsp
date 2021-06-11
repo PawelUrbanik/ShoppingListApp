@@ -76,7 +76,7 @@
 
 
 <div class="container">
-    <form class="form-signin" action="/shareList" method="post">
+    <form class="form-signin" action="${pageContext.request.contextPath}/shareList" method="post">
         <h2 class="form-signin-heading">Udostępnij listę</h2>
         <label for="name">Nazwa użytkownika:</label>
         <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa użytkownika" required
@@ -94,7 +94,7 @@
         <input name="listId" type="hidden" value="${requestScope.listId}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Udostępnij listę</button>
     </form>
-    <form action="/myLists" method="get">
+    <form action="${pageContext.request.contextPath}/myLists" method="get">
         <input type="submit" value="Powrót">
     </form>
 </div>
@@ -111,7 +111,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="/updateSharedList">
+                <form method="POST" action="${pageContext.request.contextPath}/updateSharedList">
 
                     <input type="hidden" name="list_id_m" id="list_id_m" value="${requestScope.listId}">
                     <input type="hidden" name="shared_list_id_m" id="shared_list_id_m">
@@ -149,7 +149,7 @@
             </div>
 
             <div class="modal-footer">
-                <form method="POST" action="/deleteShared">
+                <form method="POST" action="${pageContext.request.contextPath}/deleteShared">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
                     <input type="hidden" name="shared_id_d" id="shared_id_d">
                     <input type="hidden" name="list_id" id="list_id" value="${requestScope.listId}">

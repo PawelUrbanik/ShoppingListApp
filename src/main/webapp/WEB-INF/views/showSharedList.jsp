@@ -49,7 +49,7 @@
             <td>${product.addedBy}</td>
             <c:if test="${requestScope.privileges.changingState == 'true'}">
             <td width="50px">
-                <form action="/changeProductStatus" method="post">
+                <form action="${pageContext.request.contextPath}/changeProductStatus" method="post">
                     <input type="hidden" name="product_id" value="${product.id}">
                     <input type="hidden" name="bought" value="${product.bought}">
                     <input type="hidden" name="list_id" value="${requestScope.listId}">
@@ -81,7 +81,7 @@
     </tbody>
 </table>
 
-<form action="/addProduct" method="get">
+<form action="${pageContext.request.contextPath}/addProduct" method="get">
     <input type="hidden" name="listId" value="${param.get("listId")}">
     <input type="submit" value="Dodaj produkt">
 </form>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="modal-footer">
-                <form method="POST" action="/deleteProduct">
+                <form method="POST" action="${pageContext.request.contextPath}/deleteProduct">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
                     <input type="hidden" name="list_id" id="list_id" value="${requestScope.listId}">
                     <input type="hidden" name="sharedReq" value="true">
@@ -122,7 +122,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="/updateProduct">
+                <form method="POST" action="${pageContext.request.contextPath}/updateProduct">
 
                     <input type="hidden" name="list_id_m" id="list_id_m" value="${requestScope.listId}">
                     <input class="hidden-id" type="hidden" name="product_id_m" id="product_id_m">

@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
-<form class="form-signin" action="/modifyProduct" method="PUT">
+<form class="form-signin" action="${pageContext.request.contextPath}/modifyProduct" method="PUT">
     <h2 class="form-signin-heading">Modyfikuj Produkt</h2>
     <label for="name" >Nazwa :</label>
     <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus value="${product}"><br>

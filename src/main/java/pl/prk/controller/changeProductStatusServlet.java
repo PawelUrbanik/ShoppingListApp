@@ -30,6 +30,6 @@ public class changeProductStatusServlet extends HttpServlet {
             url = "/showList?listId=" + listId;
         }
 
-        resp.sendRedirect(url);
+        resp.sendRedirect(req.getContextPath()+url);
     }
 }

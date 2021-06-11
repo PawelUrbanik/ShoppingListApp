@@ -7,7 +7,7 @@
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
 <div class="container">
-    <form class="form-signin" action="/addProduct" method="post">
+    <form class="form-signin" action="${pageContext.request.contextPath}/addProduct" method="post">
         <h2 class="form-signin-heading">Dodaj Produkt</h2>
         <label for="name" >Nazwa :</label>
         <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus><br>

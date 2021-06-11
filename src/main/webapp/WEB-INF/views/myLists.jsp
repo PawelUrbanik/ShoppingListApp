@@ -13,14 +13,14 @@
  <c:forEach var="list" items="${requestScope.lists}">
 
      <div class="card mt-5 mb-3" style="max-width: 800px; margin: auto">
-         <h5 class="card-header"><a href="/showList?listId=${list.id}">${list.name}</a></h5>
+         <h5 class="card-header"><a href="${pageContext.request.contextPath}/showList?listId=${list.id}">${list.name}</a></h5>
          <div class="card-body">
              <h5 class="card-title">Opis</h5>
              <p class="card-text">${list.description}</p>
              <p>Typ: <c:if test="${list.type == 'publ'}">publiczna</c:if>
              <c:if test="${list.type == 'priv'}">prywatna</c:if></p>
              <div class="text-center">
-                 <a href="/showList?listId=${list.id}" class="btn btn-primary ">Otwórz listę</a>
+                 <a href="${pageContext.request.contextPath}/showList?listId=${list.id}" class="btn btn-primary ">Otwórz listę</a>
                  <button class="btn btn-warning"
                          data-toggle="modal"
                          data-target="#updateListModal"
@@ -38,7 +38,7 @@
                      Usuń listę
                  </button>
                  <c:if test="${list.type == 'publ'}">
-                     <form action="/sharedLists" method="post">
+                     <form action="${pageContext.request.contextPath}/sharedLists" method="post">
                          <input type="hidden" name="listId" value="${list.id}">
                          <input type="hidden" name="list_owner_id" value="${list.owner}">
                          <input type="submit" class="btn btn-light" value="Udostępnij listę">
@@ -62,7 +62,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="/updateList">
+                <form method="POST" action="${pageContext.request.contextPath}/updateList">
 
                     <input type="hidden" name="list_id_m" id="list_id_m">
                     <label for="list_name_m" >Nazwa listy:</label><br>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="modal-footer">
-                <form method="POST" action="/deleteList">
+                <form method="POST" action="${pageContext.request.contextPath}/deleteList">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
                     <input type="hidden" name="list_id" id="list_id">
                     <input type="hidden" name="list_type" id="list_type">

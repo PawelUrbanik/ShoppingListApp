@@ -32,6 +32,6 @@ public class UpdateListServlet extends HttpServlet {
 
 //TODO wyświetlenie błędu jeśli nie zostanie zaktualizowane
         System.out.println("update lists");
-        resp.sendRedirect("/myLists");
+        resp.sendRedirect(req.getContextPath()+"/myLists");
     }
 }

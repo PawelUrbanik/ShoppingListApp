@@ -23,6 +23,6 @@ public class DeleteListServlet extends HttpServlet {
 
         //TODO Strona błędu jeśli się nie usunęła
 
-        resp.sendRedirect("/myLists");
+        resp.sendRedirect(req.getContextPath()+"/myLists");
     }
 }

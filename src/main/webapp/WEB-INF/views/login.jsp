@@ -19,7 +19,7 @@
             <input type="password" id="passwordInput" class="form-control" name="j_password" placeholder="Hasło"  required autofocus>
             <div class="mt-3 mb-3">
                 <button class="btn btn-lg btn-primary btn-block">Zaloguj się</button>
-                <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+                <p>Nie masz konta? <a href="${pageContext.request.contextPath}/register">Zarejestruj się</a></p>
             </div>
 
         </form>
