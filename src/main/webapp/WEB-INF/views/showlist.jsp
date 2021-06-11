@@ -61,6 +61,7 @@
 
 <form action="${pageContext.request.contextPath}/addProduct" method="get">
     <input type="hidden" name="listId" value="${param.get("listId")}">
+    <input type="hidden" name="sharedReq" value="false">
     <input type="submit" value="Dodaj produkt">
 </form>
 

@@ -80,12 +80,13 @@
     </c:forEach>
     </tbody>
 </table>
-
+<c:if test="${requestScope.privileges.addingProducts == 'true'}">
 <form action="${pageContext.request.contextPath}/addProduct" method="get">
     <input type="hidden" name="listId" value="${param.get("listId")}">
+    <input type="hidden" name="sharedReq" value="true">
     <input type="submit" value="Dodaj produkt">
 </form>
-
+</c:if>
 <!-- Delete Product Modal -->
 <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">

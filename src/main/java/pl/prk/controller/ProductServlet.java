@@ -37,8 +37,8 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        System.out.println(req.getParameter("listId"));
         req.setAttribute("listId", req.getParameter("listId"));
+        req.setAttribute("sharedReq", req.getParameter("sharedReq"));
         req.getRequestDispatcher("/WEB-INF/views/addProduct.jsp").forward(req, resp);
     }
 
@@ -49,11 +49,11 @@ public class ProductServlet extends HttpServlet {
         Integer listId = Integer.valueOf(req.getParameter("listId"));
         Integer count = Integer.valueOf(req.getParameter("count"));
         productService.addProductToList(name, addedBy,listId, count);
-        boolean sharedReq = req.getParameter("sharedReq") != null;
+        String sharedReq = req.getParameter("sharedReq");
 
 
         String url="";
-        if (sharedReq){
+        if (sharedReq.equals("true")){
             url = "/showOneSharedList?listId=" +listId;
         }else {
             url = "/showList?listId=" + listId;

@@ -17,6 +17,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String UPDATE_LIST = "UPDATE lists SET list_name = ?, list_desc = ? WHERE id = ?";
     private final String DELETE_LIST = "DELETE FROM lists WHERE id=?";
     private final String DELETE_PRODUCTS_FROM_LIST = "DELETE FROM products WHERE listid = ?";
+    private final String DELETE_SHARED = "DELETE FROM shared WHERE list_id = ?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -76,24 +77,31 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 
         int deletedLists = 0;
         int deletedProducts = 0;
+        int deletedShared = 0;
         Connection connection = null;
         PreparedStatement deleteListStatement = null;
         PreparedStatement deleteProductsStatement = null;
+        PreparedStatement deleteSharedStatement = null;
         try
         {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
             deleteListStatement = connection.prepareStatement(DELETE_LIST);
             deleteProductsStatement = connection.prepareStatement(DELETE_PRODUCTS_FROM_LIST);
+            deleteSharedStatement = connection.prepareStatement(DELETE_SHARED);
+
 
             deleteProductsStatement.setInt(1,key);
             deletedProducts = deleteProductsStatement.executeUpdate();
+
+            deleteSharedStatement.setInt(1, key);
+            deletedShared = deleteSharedStatement.executeUpdate();
 
 
             deleteListStatement.setInt(1, key);
             deletedLists = deleteListStatement.executeUpdate();
 
-            System.out.println("Deleted products: " + deletedProducts + "Deleted lists: " + deletedLists);
+            System.out.println("Deleted products: " + deletedProducts + "Deleted lists: " + deletedLists+", deletedShared: " + deletedShared);
             connection.commit();
 
         }catch (SQLException e)
