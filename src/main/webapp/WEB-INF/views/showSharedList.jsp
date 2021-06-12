@@ -75,6 +75,7 @@
         </c:if>
     </div>
 </div>
+<br>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -143,12 +144,43 @@
     </tbody>
 </table>
 <c:if test="${requestScope.privileges.addingProducts == 'true'}">
-    <form action="${pageContext.request.contextPath}/addProduct" method="get">
-        <input type="hidden" name="listId" value="${param.get("listId")}">
-        <input type="hidden" name="sharedReq" value="true">
-        <input type="submit" value="Dodaj produkt">
-    </form>
+    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
+<%--    <form action="${pageContext.request.contextPath}/addProduct" method="get">--%>
+<%--        <input type="hidden" name="listId" value="${param.get("listId")}">--%>
+<%--        <input type="hidden" name="sharedReq" value="true">--%>
+<%--        <input type="submit" value="Dodaj produkt">--%>
+<%--    </form>--%>
 </c:if>
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="AddProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dodaj produkt </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-signin" action="${pageContext.request.contextPath}/addProduct" method="post">
+                    <label for="name" >Nazwa :</label>
+                    <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa" required autofocus><br>
+                    <label for="count" >Ilość:</label>
+                    <input name="count" id="count" type="number" class="form-control"  value="1" placeholder="Ilość" min="1" max="999999999" required autofocus>
+                    <input name="listId" type="hidden" value="${requestScope.listId}">
+                    <input type="hidden" name="sharedReq" value="true">
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    <button class="btn btn-primary" type="submit">Dodaj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Delete Product Modal -->
 <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
@@ -270,6 +302,11 @@
         document.getElementById("list_id_u").value = list_id;
         document.getElementById("list_name_m").value = name;
         document.getElementById("list_desc_m").value = list_desc;
+    })
+    $('#AddProductModal').on('show.bs.modal', function (event) {
+        var docmodel = document.getElementById('AddProductModal')
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
     })
 </script>
 
