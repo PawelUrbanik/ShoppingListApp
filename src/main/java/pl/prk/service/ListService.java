@@ -38,4 +38,8 @@ public class ListService {
     public boolean delete(int listId) {
         return shoppingListDao.delete(listId);
     }
+
+    public ShoppingList getListbyId(Integer listId) {
+        return shoppingListDao.read(listId);
+    }
 }

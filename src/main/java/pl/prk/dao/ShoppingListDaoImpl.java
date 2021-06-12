@@ -18,6 +18,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String DELETE_LIST = "DELETE FROM lists WHERE id=?";
     private final String DELETE_PRODUCTS_FROM_LIST = "DELETE FROM products WHERE listid = ?";
     private final String DELETE_SHARED = "DELETE FROM shared WHERE list_id = ?";
+    private final String GET_LIST_BY_ID = "SELECT id, list_name, list_desc, list_owner, list_type FROM lists WHERE id =?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -40,13 +41,37 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return newObject;
     }
 
     @Override
     public ShoppingList read(Integer primaryKey) {
-        return null;
+        ShoppingList list = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_LIST_BY_ID))
+        {
+            statement.setInt(1, primaryKey);
+            ResultSet resultSet = statement.executeQuery();
+            list = mapOneRow(resultSet);
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    private ShoppingList mapOneRow(ResultSet resultSet) throws SQLException {
+        ShoppingList result= new ShoppingList();
+        while (resultSet.next())
+        {
+            result.setId(resultSet.getInt("id"));
+            result.setName(resultSet.getString("list_name"));
+            result.setDescription(resultSet.getString("list_desc"));
+            result.setOwner(resultSet.getInt("list_owner"));
+            result.setType(resultSet.getString("list_type"));
+        }
+        return result;
     }
 
     @Override

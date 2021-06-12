@@ -37,6 +37,11 @@ public class UserService {
         user.setPassword(sha256Password);
     }
 
+    public String getUserById(Integer ownerId) {
+        User user = userDao.read(ownerId);
+        return user.getUsername();
+    }
+
     private static class UserMapper {
         static User map(UserRegistration userRegistration) {
             return new User(

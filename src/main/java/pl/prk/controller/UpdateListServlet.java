@@ -18,7 +18,7 @@ public class UpdateListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int listId = Integer.parseInt(req.getParameter("list_id_m"));
+        int listId = Integer.parseInt(req.getParameter("list_id_u"));
         String newListName = req.getParameter("list_name_m");
         String newListDesc = req.getParameter("list_desc_m");
 
@@ -30,8 +30,16 @@ public class UpdateListServlet extends HttpServlet {
 
         listService.update(updatedList);
 
-//TODO wyświetlenie błędu jeśli nie zostanie zaktualizowane
+        boolean sharedReq = req.getParameter("sharedReq") != null;
+
+        String url="";
+        if (sharedReq){
+            url = "/showOneSharedList?listId=" +listId;
+        }else {
+            url = "/myLists";
+        }
+
         System.out.println("update lists");
-        resp.sendRedirect(req.getContextPath()+"/myLists");
+        resp.sendRedirect(req.getContextPath()+url);
     }
 }

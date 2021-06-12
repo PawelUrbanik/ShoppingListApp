@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
 //    private final String GET_USER = "SELECT id, username, password FROM user WHERE username = ?";
 //    ORACLE
     private final String GET_USER = "SELECT id, username, password FROM user_l WHERE username = ?";
+    private final String GET_USER_BY_ID = "SELECT id, username, password FROM user_l WHERE id = ?";
 
     private final DataSource dataSource;
 
@@ -38,6 +39,17 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User read(Integer primaryKey) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_USER_BY_ID))
+        {
+            statement.setInt(1, primaryKey);
+            ResultSet resultSet = statement.executeQuery();
+            User user = mapRow(resultSet);
+            return user;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return null;
     }
 

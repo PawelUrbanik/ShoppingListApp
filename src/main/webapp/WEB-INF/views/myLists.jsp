@@ -77,7 +77,7 @@
             <div class="modal-body">
                 <form method="POST" action="${pageContext.request.contextPath}/updateList">
 
-                    <input type="hidden" name="list_id_m" id="list_id_m">
+                    <input type="hidden" name="list_id_u" id="list_id_u">
                     <label for="list_name_m" >Nazwa listy:</label><br>
                     <input type="text" id="list_name_m" name="list_name_m" required autofocus><br>
                     <label for="list_desc_m" >Opis:</label><br>
@@ -129,7 +129,7 @@
         var list_desc = button.data('list_desc')
         var modal = $(this)
         modal.find('.modal-title').text('Modyfikacja listy ' + name )
-        document.getElementById("list_id_m").value = list_id;
+        document.getElementById("list_id_u").value = list_id;
         document.getElementById("list_name_m").value = name;
         document.getElementById("list_desc_m").value = list_desc;
     })

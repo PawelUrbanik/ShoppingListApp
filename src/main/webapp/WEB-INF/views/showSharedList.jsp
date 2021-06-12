@@ -16,9 +16,25 @@
 
 </head>
 <body>
-
-
 <%@ include file="../fragment/navbar_user.jspf" %>
+
+<div class="panel panel-info">
+    <div class="panel-heading">Informacje:</div>
+    <div class="panel-body">
+        <p>Nazwa listy: ${requestScope.list.name}</p>
+        <p>Właściciel: ${requestScope.ownerName}</p>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-warning"
+                data-toggle="modal"
+                data-target="#updateListModal"
+                data-name="${list.name}"
+                data-list_id="${list.id}"
+                data-list_desc="${list.description}">
+            Modyfikuj listę
+        </button>
+    </div>
+</div>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -27,12 +43,15 @@
         <th scope="col">Ilość</th>
         <th scope="col">Kupione</th>
         <th scope="col">Dodane przez</th>
-<c:if test="${requestScope.privileges.changingState == 'true'}">
-    <th scope="col" width="50px">Oznacz jako</th> </c:if>
-<c:if test="${requestScope.privileges.updateProducts == 'true'}">
-    <th scope="col" width="50px">Modyfikacja</th></c:if>
-<c:if test="${requestScope.privileges.deleteProducts == 'true'}">
-    <th scope="col">Usuwanie</th> </c:if>
+        <c:if test="${requestScope.privileges.changingState == 'true'}">
+            <th scope="col" width="50px">Oznacz jako</th>
+        </c:if>
+        <c:if test="${requestScope.privileges.updateProducts == 'true'}">
+            <th scope="col" width="50px">Modyfikacja</th>
+        </c:if>
+        <c:if test="${requestScope.privileges.deleteProducts == 'true'}">
+            <th scope="col">Usuwanie</th>
+        </c:if>
     </tr>
     </thead>
     <tbody>
@@ -48,44 +67,47 @@
                                                                  value="NIE"></c:if></td>
             <td>${product.addedBy}</td>
             <c:if test="${requestScope.privileges.changingState == 'true'}">
-            <td width="50px">
-                <form action="${pageContext.request.contextPath}/changeProductStatus" method="post">
-                    <input type="hidden" name="product_id" value="${product.id}">
-                    <input type="hidden" name="bought" value="${product.bought}">
-                    <input type="hidden" name="list_id" value="${requestScope.listId}">
-                    <input type="hidden" name="sharedReq" value="true">
-                    <c:if test="${product.bought == 'false'}"><input type="submit"
-                                                                     class="btn btn-outline-success btn-block"
-                                                                     value="Zakupiony"></c:if>
-                    <c:if test="${product.bought == 'true'}"><input type="submit"
-                                                                    class="btn btn-outline-danger btn-block"
-                                                                    value="Niezakupiony"></c:if>
-                </form>
-            </td></c:if>
+                <td width="50px">
+                    <form action="${pageContext.request.contextPath}/changeProductStatus" method="post">
+                        <input type="hidden" name="product_id" value="${product.id}">
+                        <input type="hidden" name="bought" value="${product.bought}">
+                        <input type="hidden" name="list_id" value="${requestScope.listId}">
+                        <input type="hidden" name="sharedReq" value="true">
+                        <c:if test="${product.bought == 'false'}"><input type="submit"
+                                                                         class="btn btn-outline-success btn-block"
+                                                                         value="Zakupiony"></c:if>
+                        <c:if test="${product.bought == 'true'}"><input type="submit"
+                                                                        class="btn btn-outline-danger btn-block"
+                                                                        value="Niezakupiony"></c:if>
+                    </form>
+                </td>
+            </c:if>
             <c:if test="${requestScope.privileges.updateProducts == 'true'}">
-            <td width="50px">
-                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#updateProductModal"
-                        data-name="${product.name}" data-product_id="${product.id}" data-count="${product.count}">
-                    Modyfikuj
-                </button>
-            </td></c:if>
+                <td width="50px">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#updateProductModal"
+                            data-name="${product.name}" data-product_id="${product.id}" data-count="${product.count}">
+                        Modyfikuj
+                    </button>
+                </td>
+            </c:if>
             <c:if test="${requestScope.privileges.deleteProducts == 'true'}">
-            <td>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal"
-                        data-name="${product.name}" data-product_id="${product.id}">Usuń
-                </button>
-            </td></c:if>
+                <td>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal"
+                            data-name="${product.name}" data-product_id="${product.id}">Usuń
+                    </button>
+                </td>
+            </c:if>
 
         </tr>
     </c:forEach>
     </tbody>
 </table>
 <c:if test="${requestScope.privileges.addingProducts == 'true'}">
-<form action="${pageContext.request.contextPath}/addProduct" method="get">
-    <input type="hidden" name="listId" value="${param.get("listId")}">
-    <input type="hidden" name="sharedReq" value="true">
-    <input type="submit" value="Dodaj produkt">
-</form>
+    <form action="${pageContext.request.contextPath}/addProduct" method="get">
+        <input type="hidden" name="listId" value="${param.get("listId")}">
+        <input type="hidden" name="sharedReq" value="true">
+        <input type="submit" value="Dodaj produkt">
+    </form>
 </c:if>
 <!-- Delete Product Modal -->
 <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -141,6 +163,35 @@
         </div>
     </div>
 </div>
+<!-- Update List Modal -->
+<div class="modal fade" id="updateListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="${pageContext.request.contextPath}/updateList">
+
+                    <input type="hidden" name="list_id_u" id="list_id_u">
+                    <input type="hidden" name="sharedReq" id="sharedReq" value="true">
+                    <label for="list_name_m" >Nazwa listy:</label><br>
+                    <input type="text" id="list_name_m" name="list_name_m" required autofocus><br>
+                    <label for="list_desc_m" >Opis:</label><br>
+                    <input type="text" id="list_desc_m" name="list_desc_m" required autofocus>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $('#updateProductModal').on('show.bs.modal', function (event) {
@@ -167,6 +218,18 @@
         modal.find('.modal-title').text('Czy chcesz usunąć produkt ' + name + '?')
 // modal.find('.modal-body').text(product_id)
         document.getElementById("product_id").value = product_id;
+    })
+
+    $('#updateListModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var name = button.data('name') // Extract info from data-* attributes
+        var list_id = button.data('list_id') // Extract info from data-* attributes
+        var list_desc = button.data('list_desc')
+        var modal = $(this)
+        modal.find('.modal-title').text('Modyfikacja listy ' + name )
+        document.getElementById("list_id_u").value = list_id;
+        document.getElementById("list_name_m").value = name;
+        document.getElementById("list_desc_m").value = list_desc;
     })
 </script>
 
