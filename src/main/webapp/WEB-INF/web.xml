@@ -9,7 +9,7 @@
     <auth-method>FORM</auth-method>
     <form-login-config>
       <form-login-page>/WEB-INF/views/login.jsp</form-login-page>
-      <form-error-page>/WEB-INF/views/login.jsp</form-error-page>
+      <form-error-page>/WEB-INF/views/errors/errorLoginPage.jsp</form-error-page>
     </form-login-config>
   </login-config>
 

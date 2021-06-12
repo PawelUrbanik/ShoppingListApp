@@ -16,8 +16,8 @@
         </ul>
         <c:choose>
             <c:when test="${empty pageContext.request.userPrincipal}">
-                <a href="${pageContext.request.contextPath}/register" class="btn btn-outline-dark my-2 my-sm-0">Zarejestruj się</a>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-success my-2 my-sm-0">Zaloguj</a>
+                <a href="${pageContext.request.contextPath}/register" class="btn btn-outline-dark my-2 my-sm-0 mx-1">Zarejestruj się</a>
+                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-success my-2 my-sm-0 mx-1">Zaloguj</a>
             </c:when>
             <c:when test="${not empty pageContext.request.userPrincipal}">
                 <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-danger my-2 my-sm-0">Wyloguj</a>

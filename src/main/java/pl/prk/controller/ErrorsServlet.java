@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet("/error")
 public class ErrorsServlet extends HttpServlet {
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -21,7 +22,7 @@ public class ErrorsServlet extends HttpServlet {
             case "reg":
             {
                 forwardUrl="/register";
-                req.setAttribute("errorRegister", "Wystąpił błąd przy rejestracji. Spróbuj ponownie używając innej nazwy użytkownika lub adresu e-mail");
+                req.setAttribute("errorRegister", "Wystąpił błąd przy rejestracji. Spróbuj ponownie używając innej nazwy użytkownika lub adresu e-mail.");
             }
         }
         req.getRequestDispatcher(forwardUrl).forward(req,resp);
