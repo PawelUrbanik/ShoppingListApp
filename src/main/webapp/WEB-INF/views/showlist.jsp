@@ -107,7 +107,7 @@
                     <label for="product_name_m" >Nazwa produktu:</label><br>
                     <input type="text" id="product_name_m" name="product_name_m"><br>
                     <label for="product_count_m" >Ilość:</label><br>
-                    <input type="number" id="product_count_m" name="product_count_m" min="1" max="50">
+                    <input type="number" id="product_count_m" name="product_count_m" min="1" max="999999999">
                     <br>
                     <br>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>

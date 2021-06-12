@@ -18,21 +18,61 @@
 <body>
 <%@ include file="../fragment/navbar_user.jspf" %>
 
-<div class="panel panel-info">
+<div class="panel panel-info mx-3">
     <div class="panel-heading">Informacje:</div>
     <div class="panel-body">
         <p>Nazwa listy: ${requestScope.list.name}</p>
         <p>Właściciel: ${requestScope.ownerName}</p>
+        <p>Uprawnienia:
+            <c:if test="${requestScope.privileges.updateList == 'true'}">
+                Modyfikacja listy
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                     viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+            </c:if>
+            <c:if test="${requestScope.privileges.addingProducts == 'true'}">
+                Dodawanie produktów
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                     viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+            </c:if>
+            <c:if test="${requestScope.privileges.updateProducts == 'true'}">
+                Modyfikacja produktów
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                     viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+            </c:if>
+            <c:if test="${requestScope.privileges.changingState == 'true'}">
+                Zmiana stanu produktu
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                     viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+            </c:if>
+            <c:if test="${requestScope.privileges.deleteProducts == 'true'}">
+                Usuwanie produktów
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                     viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+            </c:if>
+
+        </p>
     </div>
     <div class="panel-footer">
-        <button class="btn btn-warning"
-                data-toggle="modal"
-                data-target="#updateListModal"
-                data-name="${list.name}"
-                data-list_id="${list.id}"
-                data-list_desc="${list.description}">
-            Modyfikuj listę
-        </button>
+        <c:if test="${requestScope.privileges.updateList == 'true'}">
+            <button class="btn btn-warning"
+                    data-toggle="modal"
+                    data-target="#updateListModal"
+                    data-name="${list.name}"
+                    data-list_id="${list.id}"
+                    data-list_desc="${list.description}">
+                Modyfikuj listę
+            </button>
+        </c:if>
     </div>
 </div>
 <table class="table table-hover">
@@ -153,7 +193,7 @@
                     <label for="product_name_m">Nazwa produktu:</label><br>
                     <input type="text" id="product_name_m" name="product_name_m"><br>
                     <label for="product_count_m">Ilość:</label><br>
-                    <input type="number" id="product_count_m" name="product_count_m" min="1" max="50">
+                    <input type="number" id="product_count_m" name="product_count_m" min="1" max="999999999">
                     <br>
                     <br>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
@@ -179,9 +219,9 @@
 
                     <input type="hidden" name="list_id_u" id="list_id_u">
                     <input type="hidden" name="sharedReq" id="sharedReq" value="true">
-                    <label for="list_name_m" >Nazwa listy:</label><br>
+                    <label for="list_name_m">Nazwa listy:</label><br>
                     <input type="text" id="list_name_m" name="list_name_m" required autofocus><br>
-                    <label for="list_desc_m" >Opis:</label><br>
+                    <label for="list_desc_m">Opis:</label><br>
                     <input type="text" id="list_desc_m" name="list_desc_m" required autofocus>
                     <br>
                     <br>
@@ -226,7 +266,7 @@
         var list_id = button.data('list_id') // Extract info from data-* attributes
         var list_desc = button.data('list_desc')
         var modal = $(this)
-        modal.find('.modal-title').text('Modyfikacja listy ' + name )
+        modal.find('.modal-title').text('Modyfikacja listy ' + name)
         document.getElementById("list_id_u").value = list_id;
         document.getElementById("list_name_m").value = name;
         document.getElementById("list_desc_m").value = list_desc;
