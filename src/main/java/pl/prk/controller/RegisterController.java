@@ -29,7 +29,7 @@ public class RegisterController extends HttpServlet {
         if (registerSucces) {
             url = "/myLists";
         }else {
-            url = "error?action=reg";
+            url = "/error?action=reg";
         }
         resp.sendRedirect(req.getContextPath()+url);
     }

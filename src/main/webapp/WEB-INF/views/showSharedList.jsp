@@ -145,11 +145,6 @@
 </table>
 <c:if test="${requestScope.privileges.addingProducts == 'true'}">
     <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
-<%--    <form action="${pageContext.request.contextPath}/addProduct" method="get">--%>
-<%--        <input type="hidden" name="listId" value="${param.get("listId")}">--%>
-<%--        <input type="hidden" name="sharedReq" value="true">--%>
-<%--        <input type="submit" value="Dodaj produkt">--%>
-<%--    </form>--%>
 </c:if>
 
 <!-- Add Product Modal -->
