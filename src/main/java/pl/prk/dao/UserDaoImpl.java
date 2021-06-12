@@ -25,9 +25,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User save(User newUser) {
+    public boolean saveU(User newUser) throws SQLException {
         saveUser(newUser);
         saveUserRole(newUser);
+        return true;
+    }
+
+    @Override
+    public User save(User newObject) {
         return null;
     }
 
@@ -78,7 +83,7 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    private void saveUser(User newUser) {
+    private void saveUser(User newUser) throws SQLException {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
             statement.setString(1, newUser.getUsername());
@@ -89,8 +94,6 @@ public class UserDaoImpl implements UserDao {
             if (generatedKeys.next()) {
                 newUser.setId(generatedKeys.getInt(1));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

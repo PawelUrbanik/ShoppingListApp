@@ -7,19 +7,21 @@ import pl.prk.model.User;
 import pl.prk.model.UserRegistration;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 public class UserService {
 
     private UserDao userDao = new UserDaoImpl();
 
-    public void register(UserRegistration userRegistration)
+    public boolean register(UserRegistration userRegistration)
     {
         User userToSave = UserMapper.map(userRegistration);
         try {
             hashPasswordWithSha256(userToSave);
-            userDao.save(userToSave);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            return userDao.saveU(userToSave);
+        } catch (NoSuchAlgorithmException | SQLException e) {
+            System.err.println("Problem to save user");
+            return false;
         }
 
     }

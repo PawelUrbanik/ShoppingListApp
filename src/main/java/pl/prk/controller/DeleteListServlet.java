@@ -21,8 +21,6 @@ public class DeleteListServlet extends HttpServlet {
         boolean deleted = listService.delete(listId);
         System.out.println("List deleted: " + deleted);
 
-        //TODO Strona błędu jeśli się nie usunęła
-
         resp.sendRedirect(req.getContextPath()+"/myLists");
     }
 }

@@ -2,6 +2,7 @@ package pl.prk.dao;
 
 import pl.prk.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao extends GenericDao<User, Integer> {
@@ -20,4 +21,6 @@ public interface UserDao extends GenericDao<User, Integer> {
 
     @Override
     List<User> getAll();
+
+    public boolean saveU(User newUser) throws SQLException;
 }

@@ -23,8 +23,15 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserRegistration userRegistration = getUserData(req);
-        userService.register(userRegistration);
-        resp.sendRedirect(req.getContextPath()+"/myLists");
+        boolean registerSucces = userService.register(userRegistration);
+        String url = "";
+
+        if (registerSucces) {
+            url = "/myLists";
+        }else {
+            url = "error?action=reg";
+        }
+        resp.sendRedirect(req.getContextPath()+url);
     }
 
     private UserRegistration getUserData(HttpServletRequest request) {

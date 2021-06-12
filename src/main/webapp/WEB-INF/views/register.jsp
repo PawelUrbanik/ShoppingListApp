@@ -8,6 +8,14 @@
 </head>
 <body>
 <%@ include file="../fragment/navbar.jspf"%>
+
+<c:if test="${requestScope.errorRegister != null}">
+    <div class="text-center mt-2">
+        <div class="alert alert-danger d-inline-block" role="alert">
+              ${requestScope.errorRegister}
+        </div>
+    </div>
+</c:if>
 <div class="container" style="max-width: 480px; margin: auto">
     <div class="text-center">
         <h1 class="h2 mb-3 mt-3">Zarejestruj się</h1>

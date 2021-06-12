@@ -26,7 +26,7 @@ public class ShowSharedForMeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String user = req.getUserPrincipal().getName();
-        System.out.println(user);
+//        System.out.println(user);
 
         List<ShoppingList> listsSharedForUser = sharedListService.getAllSharedForUser(user);
         req.setAttribute("sharedLists", listsSharedForUser);

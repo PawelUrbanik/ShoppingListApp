@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@ include file="../fragment/navbar_user.jspf"%>
-<div class="text-center">
+<div class="text-center mt-2">
 <c:if test="${requestScope.succes == 'true'}">
     <div class="alert alert-success d-inline-block" role="alert">
         ${requestScope.alertMessage}

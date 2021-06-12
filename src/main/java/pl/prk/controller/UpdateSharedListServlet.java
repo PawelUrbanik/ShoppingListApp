@@ -17,7 +17,7 @@ public class UpdateSharedListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer sharedListId = Integer.valueOf(req.getParameter("shared_list_id_m"));
-        System.out.println(sharedListId);
+//        System.out.println(sharedListId);
         Integer listId = Integer.parseInt(req.getParameter("list_id_m"));
 
         boolean updateList = req.getParameter("updateList_m") != null;

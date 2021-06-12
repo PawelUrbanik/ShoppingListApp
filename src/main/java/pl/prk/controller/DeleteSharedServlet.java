@@ -19,8 +19,6 @@ public class DeleteSharedServlet extends HttpServlet {
         Integer sharedListId = Integer.parseInt(req.getParameter("shared_id_d"));
 
         boolean deleted= sharedListService.deleteSharedListById(sharedListId);
-        System.out.println("Delete sh: " + req.getParameter("listId"));
-
 //        System.out.println("Deleted sharedList: " + deleted);
 
         req.getRequestDispatcher("/sharedLists").forward(req, resp);
