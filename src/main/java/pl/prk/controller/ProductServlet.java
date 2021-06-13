@@ -1,6 +1,5 @@
 package pl.prk.controller;
 
-import com.sun.security.auth.UserPrincipal;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.HttpMethodConstraint;
@@ -9,12 +8,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import pl.prk.model.Product;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
-import java.security.Principal;
-
+/**
+ * Servlet class - adding the products.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/addProduct")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
         httpMethodConstraints = {

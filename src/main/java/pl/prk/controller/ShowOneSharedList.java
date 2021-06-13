@@ -15,7 +15,11 @@ import pl.prk.service.UserService;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Servlet class - displaying the shared list for the given user.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/showOneSharedList")
 public class ShowOneSharedList extends HttpServlet {
 

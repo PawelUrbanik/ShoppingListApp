@@ -5,7 +5,11 @@ import pl.prk.model.SharedList;
 import pl.prk.model.ShoppingList;
 
 import java.util.List;
-
+/**
+ * The interface with methods for SharedList class handling.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public interface SharedListDao extends GenericDao<SharedList, Integer> {
 
     @Override

@@ -1,5 +1,9 @@
 package pl.prk.model;
-
+/**
+ * The product class.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class Product {
 
     private Integer id;

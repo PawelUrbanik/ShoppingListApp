@@ -2,7 +2,11 @@ package pl.prk.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+/**
+ * The shared list class.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class SharedList implements Serializable {
 
     private Integer id;

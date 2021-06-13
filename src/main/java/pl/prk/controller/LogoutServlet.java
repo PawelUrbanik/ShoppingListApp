@@ -7,7 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - the user logout.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 

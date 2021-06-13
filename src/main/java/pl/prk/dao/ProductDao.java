@@ -3,7 +3,11 @@ package pl.prk.dao;
 import pl.prk.model.Product;
 
 import java.util.List;
-
+/**
+ * The interface with methods for Product class handling.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public interface ProductDao extends GenericDao<Product, Integer> {
     @Override
     Product save(Product newObject);

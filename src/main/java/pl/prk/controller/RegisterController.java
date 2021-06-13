@@ -9,7 +9,11 @@ import pl.prk.model.UserRegistration;
 import pl.prk.service.UserService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - the user registration
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 

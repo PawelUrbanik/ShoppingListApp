@@ -10,7 +10,11 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The implantation of SharedListDao interface.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class SharedListDaoImpl implements SharedListDao {
 
     private final String CREATE_SHARED_LIST = "INSERT INTO shared (list_id, owner_id, user_id, username, update_list, add_product, " +

@@ -8,7 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.service.SharedListService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - shared status modification - the change of permissions for a given user.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/updateSharedList")
 public class UpdateSharedListServlet extends HttpServlet {
     

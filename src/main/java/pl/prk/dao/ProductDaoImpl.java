@@ -7,7 +7,11 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The implantation of ProductDao interface.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class ProductDaoImpl implements ProductDao{
 
     private final String CREATE_PRODUCT = "INSERT INTO products (name, listId, bought, addedBy, count) VALUES (?,?,?,?,?)";

@@ -9,7 +9,11 @@ import pl.prk.model.ShoppingList;
 import pl.prk.service.ListService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - update of the modified shopping list.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/updateList")
 public class UpdateListServlet extends HttpServlet {
 

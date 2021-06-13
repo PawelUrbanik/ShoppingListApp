@@ -9,6 +9,11 @@ import pl.prk.service.ListService;
 
 import java.io.IOException;
 
+/**
+ * Servlet class - deleting the shopping lists.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/deleteList")
 public class DeleteListServlet extends HttpServlet {
     ListService listService = new ListService();

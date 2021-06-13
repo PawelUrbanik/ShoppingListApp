@@ -8,15 +8,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import pl.prk.dao.ShoppingListDao;
-import pl.prk.dao.ShoppingListDaoImpl;
-import pl.prk.exception.AddListException;
-import pl.prk.model.ShoppingList;
 import pl.prk.service.ListService;
 
 import java.io.IOException;
-import java.util.Random;
 
+/**
+ * Servlet class - adding the shopping lists.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/addList")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
         httpMethodConstraints = {

@@ -10,7 +10,11 @@ import pl.prk.exception.UserNotExistException;
 import pl.prk.service.SharedListService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - listing of the shared shopping lists.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/shareList")
 public class ShareListServlet extends HttpServlet {
 

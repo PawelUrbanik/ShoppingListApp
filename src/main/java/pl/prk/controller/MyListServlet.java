@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Servlet class - listing the shopping lists for a given user.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/myLists")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
         httpMethodConstraints = {

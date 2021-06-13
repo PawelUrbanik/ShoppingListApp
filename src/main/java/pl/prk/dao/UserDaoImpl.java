@@ -6,7 +6,11 @@ import pl.prk.util.ConnectionProvider;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
-
+/**
+ * The implantation of UserDao interfacce.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class UserDaoImpl implements UserDao {
 //    MYSQL
 //    private final String CREATE_USER = "INSERT INTO user (username, email, password) VALUES (?, ?, ?);";

@@ -13,7 +13,11 @@ import pl.prk.service.ProductService;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Servlet class - displaying the given shopping list.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/showList")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
         httpMethodConstraints = {

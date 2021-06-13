@@ -1,5 +1,9 @@
 package pl.prk.model;
-
+/**
+ * The registration class.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class UserRegistration {
 
     private String username;

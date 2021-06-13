@@ -7,7 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - the redirection to login.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
     @Override

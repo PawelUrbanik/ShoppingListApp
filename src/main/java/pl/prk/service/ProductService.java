@@ -5,7 +5,11 @@ import pl.prk.dao.ProductDaoImpl;
 import pl.prk.model.Product;
 
 import java.util.List;
-
+/**
+ * The service class supporting the other classes.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class ProductService {
 
     ProductDao productDao = new ProductDaoImpl();

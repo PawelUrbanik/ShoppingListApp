@@ -8,7 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - change of the product status.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/changeProductStatus")
 public class changeProductStatusServlet extends HttpServlet {
 

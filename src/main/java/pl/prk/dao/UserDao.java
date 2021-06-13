@@ -4,7 +4,11 @@ import pl.prk.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * The interface with methods for User class handling.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public interface UserDao extends GenericDao<User, Integer> {
     @Override
     User save(User newObject);

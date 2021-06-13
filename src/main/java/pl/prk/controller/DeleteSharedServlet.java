@@ -8,7 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.service.SharedListService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - removal of the shared shopping lists.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/deleteShared")
 public class DeleteSharedServlet extends HttpServlet {
 

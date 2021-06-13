@@ -12,7 +12,11 @@ import pl.prk.model.Product;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - the product modification.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/updateProduct")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"USER"}),
         httpMethodConstraints = {

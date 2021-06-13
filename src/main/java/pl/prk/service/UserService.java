@@ -8,7 +8,11 @@ import pl.prk.model.UserRegistration;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-
+/**
+ * The service class supporting the other classes.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class UserService {
 
     private UserDao userDao = new UserDaoImpl();

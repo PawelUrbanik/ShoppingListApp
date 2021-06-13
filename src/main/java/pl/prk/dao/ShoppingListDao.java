@@ -6,7 +6,11 @@ import pl.prk.util.ConnectionProvider;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.List;
-
+/**
+ * The interface with methods for ShoppingList class handling.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public interface ShoppingListDao extends GenericDao<ShoppingList, Integer> {
     @Override
     ShoppingList save(ShoppingList newObject);

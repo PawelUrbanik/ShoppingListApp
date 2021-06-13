@@ -7,7 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
+/**
+ * Servlet class - reporting the errors during the user registration.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/error")
 public class ErrorsServlet extends HttpServlet {
 

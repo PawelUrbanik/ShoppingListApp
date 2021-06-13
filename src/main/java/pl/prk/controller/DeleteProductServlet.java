@@ -9,7 +9,11 @@ import pl.prk.service.ProductService;
 
 import java.io.IOException;
 
-
+/**
+ * Servlet class - the product removal.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/deleteProduct")
 public class DeleteProductServlet extends HttpServlet {
 

@@ -1,5 +1,9 @@
 package pl.prk.model;
-
+/**
+ * The users lists class.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class User {
 
     private Integer id;

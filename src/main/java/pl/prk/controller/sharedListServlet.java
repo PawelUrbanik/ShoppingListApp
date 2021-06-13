@@ -12,7 +12,11 @@ import pl.prk.service.UserService;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Servlet class - listing of shopping lists with sharing status.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/sharedLists")
 public class sharedListServlet extends HttpServlet {
 

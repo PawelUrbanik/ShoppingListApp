@@ -8,6 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The implantation of ShoppingListDao interface.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner, list_type) VALUES(?, ?, ?, ?)";
 //    MYSQL

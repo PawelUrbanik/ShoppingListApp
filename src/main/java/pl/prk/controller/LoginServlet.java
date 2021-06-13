@@ -9,6 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+/**
+ * Servlet class - checking the user login.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 
 @WebServlet("/login")
 @ServletSecurity(

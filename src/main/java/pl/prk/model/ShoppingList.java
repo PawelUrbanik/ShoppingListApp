@@ -1,5 +1,9 @@
 package pl.prk.model;
-
+/**
+ * The shopping lists class.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class ShoppingList {
 
     private int id;

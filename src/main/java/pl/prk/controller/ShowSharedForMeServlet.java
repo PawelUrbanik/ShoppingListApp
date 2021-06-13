@@ -11,7 +11,11 @@ import pl.prk.service.SharedListService;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-
+/**
+ * Servlet class - displaying all the shopping lists for a given user.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 @WebServlet("/sharedForMe")
 public class ShowSharedForMeServlet extends HttpServlet {
 

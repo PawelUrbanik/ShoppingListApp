@@ -10,7 +10,11 @@ import pl.prk.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The serviceclass supporting the other classes.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public class SharedListService {
 
     SharedListDao sharedListDao;

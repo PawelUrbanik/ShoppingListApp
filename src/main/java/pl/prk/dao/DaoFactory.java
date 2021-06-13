@@ -1,7 +1,11 @@
 package pl.prk.dao;
 
 import pl.prk.exception.NoSuchDbTypeExpetion;
-
+/**
+ * Servlet class - change of the product status.
+ *
+ * @author Paweł Urbanik, Radosław Szajdak
+ */
 public abstract class DaoFactory {
     public static final int MYSQL_DAO_FACTORY = 1;
     public abstract ShoppingListDao getShoppingListDao();
