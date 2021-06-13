@@ -74,29 +74,51 @@
     </tbody>
 </table>
 
-
-<div class="container">
-    <form class="form-signin" action="${pageContext.request.contextPath}/shareList" method="post">
-        <h2 class="form-signin-heading">Udostępnij listę</h2>
-        <label for="name">Nazwa użytkownika:</label>
-        <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa użytkownika" required
-               autofocus><br>
-        <input type="checkbox" id="updateList" name="updateList" checked>
-        <label for="updateList">Modyfikacja listy</label><br>
-        <input type="checkbox" id="addProduct" name="addProduct" checked>
-        <label for="addProduct">Dodawanie produktów</label><br>
-        <input type="checkbox" id="updateProduct" name="updateProduct" checked>
-        <label for="updateProduct">Modyfikacja produktów</label><br>
-        <input type="checkbox" id="changeState" name="changeState" checked>
-        <label for="changeState">Zmiana stanu</label><br>
-        <input type="checkbox" id="deleteProduct" name="deleteProduct" checked>
-        <label for="deleteProduct">Usuwanie produktów</label><br>
-        <input name="listId" type="hidden" id="listId" value="${requestScope.listId}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Udostępnij listę</button>
-    </form>
+<div class="container text-center">
+    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#shareListModal">Udostępnij listę</button>
     <form action="${pageContext.request.contextPath}/myLists" method="get">
-        <input type="submit" value="Powrót">
+        <input class="btn btn-light mt-2" type="submit" value="Powrót">
     </form>
+</div>
+
+<!-- Share List Modal -->
+<div class="modal fade" id="shareListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <form class="form-signin" action="${pageContext.request.contextPath}/shareList" method="post">
+                        <h2 class="form-signin-heading">Udostępnij listę</h2>
+                        <label for="name">Nazwa użytkownika:</label>
+                        <input id="name" name="inputName" type="text" class="form-control" placeholder="Nazwa użytkownika" required
+                               autofocus><br>
+                        <input type="checkbox" id="updateList" name="updateList" checked>
+                        <label for="updateList">Modyfikacja listy</label><br>
+                        <input type="checkbox" id="addProduct" name="addProduct" checked>
+                        <label for="addProduct">Dodawanie produktów</label><br>
+                        <input type="checkbox" id="updateProduct" name="updateProduct" checked>
+                        <label for="updateProduct">Modyfikacja produktów</label><br>
+                        <input type="checkbox" id="changeState" name="changeState" checked>
+                        <label for="changeState">Zmiana stanu</label><br>
+                        <input type="checkbox" id="deleteProduct" name="deleteProduct" checked>
+                        <label for="deleteProduct">Usuwanie produktów</label><br>
+                        <input name="listId" type="hidden" id="listId" value="${requestScope.listId}">
+                        <br>
+                        <br>
+                        <button class="btn btn-primary" type="submit">Udostępnij listę</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Update Product Modal -->

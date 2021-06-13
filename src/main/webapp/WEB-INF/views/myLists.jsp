@@ -54,7 +54,7 @@
                      <form action="${pageContext.request.contextPath}/sharedLists" method="post">
                          <input type="hidden" name="listId" value="${list.id}">
                          <input type="hidden" name="list_owner_id" value="${list.owner}">
-                         <input type="submit" class="btn btn-light" value="Udostępnij listę">
+                         <input type="submit" class="btn btn-light mt-2" value="Udostępnij listę">
                      </form>
                  </c:if>
              </div>

@@ -59,8 +59,9 @@
     </tbody>
 </table>
 
-
-<button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
+<div class="container text-center">
+    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
+</div>
 
 <!-- Add Product Modal -->
 <div class="modal fade" id="AddProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

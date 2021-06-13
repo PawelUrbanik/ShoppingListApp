@@ -143,9 +143,11 @@
     </c:forEach>
     </tbody>
 </table>
-<c:if test="${requestScope.privileges.addingProducts == 'true'}">
-    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
-</c:if>
+<div class="container text-center">
+    <c:if test="${requestScope.privileges.addingProducts == 'true'}">
+        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#AddProductModal">Dodaj produkt</button>
+    </c:if>
+</div>
 
 <!-- Add Product Modal -->
 <div class="modal fade" id="AddProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
