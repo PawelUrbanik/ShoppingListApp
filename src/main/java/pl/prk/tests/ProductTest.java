@@ -1,6 +1,8 @@
-package pl.prk.model;
+package pl.prk.tests;
 
 import org.junit.jupiter.api.Test;
+import pl.prk.model.Product;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
