@@ -14,7 +14,7 @@ import java.util.List;
  * @author Paweł Urbanik, Radosław Szajdak
  */
 public class ShoppingListDaoImpl implements ShoppingListDao{
-    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner, list_type) VALUES(?, ?, ?, ?)";
+    private final String CREATE_LIST = "INSERT INTO lists (list_name, list_desc, list_owner, list_type, last_update) VALUES(?, ?, ?, ?, ?)";
 //    MYSQL
 //    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
 //    ORACLE
@@ -38,6 +38,8 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
             statement.setString(2, newObject.getDescription());
             statement.setInt(3, newObject.getOwner());
             statement.setString(4, newObject.getType());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            statement.setTimestamp(5, timestamp);
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
