@@ -22,6 +22,7 @@
                 <a href="${pageContext.request.contextPath}/sharedForMe" class="nav-link">Udostępnione listy</a>
             </li>
         </ul>
+        <h5 class="mx-2">Witaj, ${sessionScope.username}</h5>
         <c:choose>
             <c:when test="${empty pageContext.request.userPrincipal}">
                 <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-success my-2 my-sm-0">Zaloguj</a>
