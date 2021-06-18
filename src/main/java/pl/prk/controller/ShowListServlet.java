@@ -50,6 +50,10 @@ public class ShowListServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        String error = req.getParameter("error");
+        if (!error.isEmpty()){
+            req.setAttribute("error", error);
+        }
         req.getRequestDispatcher("/WEB-INF/views/showlist.jsp").forward(req, resp);
     }
 

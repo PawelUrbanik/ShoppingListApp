@@ -9,9 +9,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pl.prk.model.Product;
+import pl.prk.service.ListService;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 /**
  * Servlet class - the product modification.
  *
@@ -27,12 +31,31 @@ import java.io.IOException;
 )
 public class ModifyProductServlet extends HttpServlet {
 
+    ProductService productService  = new ProductService();
+    ListService listService = new ListService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductService productService  = new ProductService();
+
 
         int listId = Integer.parseInt(req.getParameter("list_id_m"));
+
+        Timestamp timestamp=null;
+        Timestamp dbLastUpdate=null;
+        String timestampString = req.getParameter("last_update");
+        if (!timestampString.isEmpty()) {
+            timestamp = Timestamp.valueOf(timestampString);
+        }
+
+        try {
+            dbLastUpdate = listService.getLastUpdate(listId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        boolean sameUpdate = timestamp.equals(dbLastUpdate);
+        System.out.println( "SU :"+sameUpdate);
+
         int productId = Integer.parseInt(req.getParameter("product_id_m"));
         String productName = req.getParameter("product_name_m");
         int productCount = Integer.parseInt(req.getParameter("product_count_m"));
@@ -45,7 +68,15 @@ public class ModifyProductServlet extends HttpServlet {
         product.setName(productName);
         product.setCount(productCount);
 
-        productService.update(product);
+        if (sameUpdate){
+            productService.update(product);
+            try {
+                listService.updateLastModified(listId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         boolean sharedReq = req.getParameter("sharedReq") != null;
 
         String url="";
@@ -53,6 +84,12 @@ public class ModifyProductServlet extends HttpServlet {
             url = "/showOneSharedList?listId=" +listId;
         }else {
             url = "/showList?listId=" + listId;
+        }
+
+        if (!sameUpdate){
+            url = url+"&error=true";
+        }else {
+            url = url+"&error=false";
         }
 
         resp.sendRedirect(req.getContextPath()+url);

@@ -8,9 +8,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import pl.prk.service.ListService;
 import pl.prk.service.ProductService;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  * Servlet class - adding the products.
  *
@@ -31,9 +34,11 @@ import java.io.IOException;
 public class ProductServlet extends HttpServlet {
 
     private ProductService productService;
+    private ListService listService;
 
     public ProductServlet() {
         this.productService = new ProductService();
+        this.listService = new ListService();
     }
 
     @Override
@@ -50,6 +55,12 @@ public class ProductServlet extends HttpServlet {
         Integer listId = Integer.valueOf(req.getParameter("listId"));
         Integer count = Integer.valueOf(req.getParameter("count"));
         productService.addProductToList(name, addedBy,listId, count);
+        try {
+            listService.updateLastModified(listId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String sharedReq = req.getParameter("sharedReq");
 
 
@@ -60,6 +71,6 @@ public class ProductServlet extends HttpServlet {
             url = "/showList?listId=" + listId;
         }
 
-        resp.sendRedirect(req.getContextPath()+url);
+        resp.sendRedirect(req.getContextPath()+url+"&error=false");
     }
 }

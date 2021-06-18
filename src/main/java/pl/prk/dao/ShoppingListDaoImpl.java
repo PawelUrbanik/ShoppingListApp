@@ -24,6 +24,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
     private final String DELETE_PRODUCTS_FROM_LIST = "DELETE FROM products WHERE listid = ?";
     private final String DELETE_SHARED = "DELETE FROM shared WHERE list_id = ?";
     private final String GET_LIST_BY_ID = "SELECT id, list_name, list_desc, list_owner, list_type FROM lists WHERE id =?";
+    private final String UPDATE_LAST_UPDATE ="UPDATE lists SET last_update=? WHERE id =?";
     private final DataSource dataSource;
 
     public ShoppingListDaoImpl() {
@@ -213,11 +214,12 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 
     public void updateLastUpdate(Integer listId) throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement(UPDATE_LAST_UPDATE))
         {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            String SQL = "UPDATE lists SET last_update="+timestamp+" WHERE id ="+listId;
-            statement.executeUpdate(SQL);
+            statement.setTimestamp(1, timestamp);
+            statement.setInt(2, listId);
+            statement.executeUpdate();
         }
     }
 
