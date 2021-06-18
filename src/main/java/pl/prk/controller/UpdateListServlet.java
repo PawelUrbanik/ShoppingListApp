@@ -38,7 +38,7 @@ public class UpdateListServlet extends HttpServlet {
 
         String url="";
         if (sharedReq){
-            url = "/showOneSharedList?listId=" +listId;
+            url = "/showOneSharedList?listId=" +listId+"&error=false";
         }else {
             url = "/myLists";
         }

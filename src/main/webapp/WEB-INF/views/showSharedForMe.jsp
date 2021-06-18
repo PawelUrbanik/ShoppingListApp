@@ -13,12 +13,12 @@
 <c:forEach var="list" items="${requestScope.sharedLists}">
 
     <div class="card mt-5 mb-3" style="max-width: 800px; margin: auto">
-        <h5 class="card-header"><a href="${pageContext.request.contextPath}/showOneSharedList?listId=${list.id}">${list.name}</a></h5>
+        <h5 class="card-header"><a href="${pageContext.request.contextPath}/showOneSharedList?listId=${list.id}&error=false">${list.name}</a></h5>
         <div class="card-body">
             <h5 class="card-title">Opis</h5>
             <p class="card-text">${list.description}</p>
             <div class="text-center">
-                <a href="${pageContext.request.contextPath}/showOneSharedList?listId=${list.id}" class="btn btn-primary ">Otwórz listę</a>
+                <a href="${pageContext.request.contextPath}/showOneSharedList?listId=${list.id}&error=false" class="btn btn-primary ">Otwórz listę</a>
             </div>
         </div>
     </div>

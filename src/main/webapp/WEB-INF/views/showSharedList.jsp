@@ -18,6 +18,7 @@
 <body>
 <%@ include file="../fragment/navbar_user.jspf" %>
 
+
 <div class="panel panel-info mx-3">
     <div class="panel-heading">Informacje:</div>
     <div class="panel-body">
@@ -76,6 +77,14 @@
     </div>
 </div>
 <br>
+<div class="text-center mt-2">
+<c:if test="${requestScope.error == 'true'}">
+    <div class="alert alert-danger d-inline-block" role="alert">
+        Operacja zakończona niepowodzeniem. Inny użytkownik zmodyfikował listę.
+        Strona została zaktualizowana
+    </div>
+</c:if>
+</div>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -112,6 +121,7 @@
                     <form action="${pageContext.request.contextPath}/changeProductStatus" method="post">
                         <input type="hidden" name="product_id" value="${product.id}">
                         <input type="hidden" name="bought" value="${product.bought}">
+                        <input name="last_update" type="hidden" value="${requestScope.lastUpdate}">
                         <input type="hidden" name="list_id" value="${requestScope.listId}">
                         <input type="hidden" name="sharedReq" value="true">
                         <c:if test="${product.bought == 'false'}"><input type="submit"
@@ -193,6 +203,7 @@
                 <form method="POST" action="${pageContext.request.contextPath}/deleteProduct">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
                     <input type="hidden" name="list_id" id="list_id" value="${requestScope.listId}">
+                    <input name="last_update" type="hidden" value="${requestScope.lastUpdate}">
                     <input type="hidden" name="sharedReq" value="true">
                     <input class="hidden-id" type="hidden" name="product_id" id="product_id">
                     <button type="submit" class="btn btn-danger">Tak, usuń produkt</button>
@@ -219,6 +230,7 @@
                     <input type="hidden" name="list_id_m" id="list_id_m" value="${requestScope.listId}">
                     <input class="hidden-id" type="hidden" name="product_id_m" id="product_id_m">
                     <input type="hidden" name="sharedReq" value="true">
+                    <input name="last_update" type="hidden" value="${requestScope.lastUpdate}">
                     <label for="product_name_m">Nazwa produktu:</label><br>
                     <input type="text" id="product_name_m" name="product_name_m"><br>
                     <label for="product_count_m">Ilość:</label><br>

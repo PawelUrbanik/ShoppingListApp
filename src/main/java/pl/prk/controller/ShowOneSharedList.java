@@ -50,6 +50,10 @@ public class ShowOneSharedList extends HttpServlet {
         req.setAttribute("list", shoppingList);
         req.setAttribute("ownerName", ownerName);
         req.setAttribute("privileges", sharedList);
+        String error = req.getParameter("error");
+        if (!error.isEmpty()){
+            req.setAttribute("error", error);
+        }
 
         req.getRequestDispatcher("/WEB-INF/views/showSharedList.jsp").forward(req, resp);
     }
