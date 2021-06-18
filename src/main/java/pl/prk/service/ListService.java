@@ -4,6 +4,8 @@ import pl.prk.dao.ShoppingListDao;
 import pl.prk.dao.ShoppingListDaoImpl;
 import pl.prk.model.ShoppingList;
 
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -81,5 +83,15 @@ public class ListService {
      */
     public ShoppingList getListbyId(Integer listId) {
         return shoppingListDao.read(listId);
+    }
+
+    public void updateLastModified(Integer listId) throws SQLException {
+        shoppingListDao.updateLastUpdate(listId);
+    }
+
+    public Timestamp getLastUpdate(Integer listId)throws SQLException
+    {
+        Timestamp lastUpdate = shoppingListDao.getLastUpdate(listId);
+        return lastUpdate;
     }
 }

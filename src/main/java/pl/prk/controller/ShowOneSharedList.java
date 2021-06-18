@@ -14,6 +14,8 @@ import pl.prk.service.SharedListService;
 import pl.prk.service.UserService;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 /**
  * Servlet class - displaying the shared list for the given user.
@@ -35,7 +37,11 @@ public class ShowOneSharedList extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        saveProductsInRequest(req);
+        try {
+            saveProductsInRequest(req);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Integer listId = Integer.valueOf(req.getParameter("listId"));
         String user = req.getUserPrincipal().getName();
         SharedList sharedList = sharedListService.getOneByListIdAndUsername(listId, user);
@@ -48,11 +54,12 @@ public class ShowOneSharedList extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/showSharedList.jsp").forward(req, resp);
     }
 
-    private void saveProductsInRequest(HttpServletRequest request)
-    {
+    private void saveProductsInRequest(HttpServletRequest request) throws SQLException {
         Integer listId = Integer.valueOf(request.getParameter("listId"));
         List<Product> products = productService.getProductsByList(listId);
         request.setAttribute("products", products);
         request.setAttribute("listId", listId);
+        Timestamp lastUpdate = listService.getLastUpdate(listId);
+        request.setAttribute("lastUpdate", lastUpdate);
     }
 }

@@ -5,6 +5,8 @@ import pl.prk.util.ConnectionProvider;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 /**
  * The interface with methods for ShoppingList class handling.
@@ -28,5 +30,11 @@ public interface ShoppingListDao extends GenericDao<ShoppingList, Integer> {
     List<ShoppingList> getAll();
 
     List<ShoppingList> getListsByUser(String username);
+
+    public void updateLastUpdate(Integer listId) throws SQLException;
+
+    public Timestamp getLastUpdate(Integer listId) throws SQLException;
+
+    ;
 }
 

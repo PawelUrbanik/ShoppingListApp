@@ -19,7 +19,7 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
 //    private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user  ON lists.list_owner= user.id AND user.username=?";
 //    ORACLE
     private final String GET_LISTS_BY_USER = "SELECT lists.id, list_name, list_desc, list_owner, list_type, username FROM lists INNER JOIN  user_l  ON lists.list_owner= user_l.id AND user_l.username=?";
-    private final String UPDATE_LIST = "UPDATE lists SET list_name = ?, list_desc = ? WHERE id = ?";
+    private final String UPDATE_LIST = "UPDATE lists SET list_name = ?, list_desc = ?, last_update=? WHERE id = ?";
     private final String DELETE_LIST = "DELETE FROM lists WHERE id=?";
     private final String DELETE_PRODUCTS_FROM_LIST = "DELETE FROM products WHERE listid = ?";
     private final String DELETE_SHARED = "DELETE FROM shared WHERE list_id = ?";
@@ -90,8 +90,9 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
         {
             statement.setString(1,updatedObject.getName());
             statement.setString(2,updatedObject.getDescription());
-            statement.setInt(3, updatedObject.getId());
-
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            statement.setTimestamp(3, timestamp);
+            statement.setInt(4, updatedObject.getId());
             rowUpdated= statement.executeUpdate();
         }catch (SQLException e)
         {
@@ -208,5 +209,32 @@ public class ShoppingListDaoImpl implements ShoppingListDao{
             resultList.add(shoppingList);
         }
         return resultList;
+    }
+
+    public void updateLastUpdate(Integer listId) throws SQLException {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String SQL = "UPDATE lists SET last_update="+timestamp+" WHERE id ="+listId;
+            statement.executeUpdate(SQL);
+        }
+    }
+
+    @Override
+    public Timestamp getLastUpdate(Integer listId) throws SQLException {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            String SQL = "SELECT last_update FROM lists WHERE id="+listId;
+            ResultSet resultSet = statement.executeQuery(SQL);
+            Timestamp timestamp = null;
+            while (resultSet.next())
+            {
+                timestamp =resultSet.getTimestamp(1);
+            }
+
+            return timestamp;
+        }
     }
 }
